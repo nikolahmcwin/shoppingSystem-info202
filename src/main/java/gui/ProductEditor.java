@@ -6,6 +6,7 @@
 package gui;
 
 import java.math.BigDecimal;
+import domain.Product;
 
 /**
  *
@@ -155,11 +156,23 @@ public class ProductEditor extends javax.swing.JDialog {
         String inputCategory = (String) txtCategory.getSelectedItem();
         String inputPrice = txtPrice.getText();
         String inputQuantity = txtQuantity.getText();
-        System.out.println("ID entered is: " + inputID + 
+        /* System.out.println("ID entered is: " + inputID + 
                 ", name entered is: " + inputName + ", other fields: " + inputDescription + 
-                " " + inputCategory + " " + inputPrice + " " + inputQuantity);
+                " " + inputCategory + " " + inputPrice + " " + inputQuantity); */
         Integer intQuantity = new Integer(inputQuantity);
         BigDecimal bdPrice = new BigDecimal(inputPrice);
+        
+        Product newProd = new Product();
+        
+        newProd.setProductID(inputID);
+        newProd.setName(inputName);
+        newProd.setDescription(inputDescription);
+        newProd.setCategory(inputCategory);
+        newProd.setPrice(bdPrice);
+        newProd.setQuantityInStock(intQuantity);
+        
+        System.out.println(newProd.toString());
+        
     }//GEN-LAST:event_buttonSaveActionPerformed
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
