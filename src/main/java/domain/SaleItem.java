@@ -52,8 +52,6 @@ public class SaleItem {
 				  + ", sale=" + sale + '}';
 	}
 	
-	
-	
 	public BigDecimal getItemTotal() {
 		BigDecimal quantity = new BigDecimal(quantityPurchased);
 		BigDecimal itemTotal = quantity.multiply(salePrice);

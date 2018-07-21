@@ -87,11 +87,13 @@ public class MainMenu extends javax.swing.JFrame {
    }// </editor-fold>//GEN-END:initComponents
 
    private void buttonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExitActionPerformed
-      dispose();
+      System.exit(0);
    }//GEN-LAST:event_buttonExitActionPerformed
 
    private void buttonAddNewProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddNewProductActionPerformed
-      // TODO add your handling code here:
+      ProductEditor addProduct = new ProductEditor(this, true);
+		addProduct.setLocationRelativeTo(this);
+		addProduct.setVisible(true);
    }//GEN-LAST:event_buttonAddNewProductActionPerformed
 
    private void buttonViewProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonViewProductsActionPerformed
