@@ -152,21 +152,23 @@ public class ProductEditor extends javax.swing.JDialog {
    }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
-        // TODO add your handling code here:
+        
+		 // Pull out the text from the entry fields
         String inputID = txtID.getText();
         String inputName = txtName.getText();
         String inputDescription = txtDescription.getText();
         String inputCategory = (String) txtCategory.getSelectedItem();
         String inputPrice = txtPrice.getText();
         String inputQuantity = txtQuantity.getText();
-        /* System.out.println("ID entered is: " + inputID + 
-                ", name entered is: " + inputName + ", other fields: " + inputDescription + 
-                " " + inputCategory + " " + inputPrice + " " + inputQuantity); */
+
+		  // Convert the two numbers from their String representation
         Integer intQuantity = new Integer(inputQuantity);
         BigDecimal bdPrice = new BigDecimal(inputPrice);
         
+		  // Create a new Product instance
         Product newProd = new Product();
         
+		  // Set all the Product fields to those from the form
         newProd.setProductID(inputID);
         newProd.setName(inputName);
         newProd.setDescription(inputDescription);
@@ -174,6 +176,7 @@ public class ProductEditor extends javax.swing.JDialog {
         newProd.setPrice(bdPrice);
         newProd.setQuantityInStock(intQuantity);
         
+		  // Print the new Product to the console, confirming entry
         System.out.println(newProd.toString());
         
     }//GEN-LAST:event_buttonSaveActionPerformed
