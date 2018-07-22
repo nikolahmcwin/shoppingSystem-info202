@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author peani371
  */
-public class ProductStorer {
+public class ProductListDAO {
 
     private static List<Product> products = new ArrayList<>();
     // Add a set of categories, cos it removes duplicates. Hash set or tree set.

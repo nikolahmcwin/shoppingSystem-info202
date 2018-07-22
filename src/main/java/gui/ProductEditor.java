@@ -5,7 +5,7 @@
  */
 package gui;
 
-import dao.ProductStorer;
+import dao.ProductListDAO;
 import java.math.BigDecimal;
 import domain.Product;
 
@@ -15,7 +15,7 @@ import domain.Product;
  */
 public class ProductEditor extends javax.swing.JDialog {
 
-    private ProductStorer pStore = new ProductStorer();
+    private ProductListDAO pStore = new ProductListDAO();
 
     /**
      * Creates new form ProductEditor
