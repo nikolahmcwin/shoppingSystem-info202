@@ -18,6 +18,7 @@ public class Customer {
     private String password;
     private String emailAddress;
     private String shippingDetails;
+    private String creditCardDetails;
 
 	public void setPersonID(String personID) {
 		this.personID = personID;
@@ -87,5 +88,5 @@ public class Customer {
 	public String toString() {
 		return "Customer{" + "personID=" + personID + ", firstName=" + firstName + ", surname=" + surname + '}';
 	}
-    private String creditCardDetails;
+    
 }

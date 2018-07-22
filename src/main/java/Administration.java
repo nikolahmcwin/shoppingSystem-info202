@@ -16,8 +16,8 @@ public class Administration {
     public static void main(String[] args) {
 		 
         MainMenu menu = new MainMenu();
-		  menu.setLocationRelativeTo(null);
-		  menu.setVisible(true);
+        menu.setLocationRelativeTo(null);
+	menu.setVisible(true);
     }
     
 }

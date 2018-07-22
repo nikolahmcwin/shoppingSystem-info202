@@ -85,9 +85,9 @@ public class MainMenu extends javax.swing.JFrame {
    }//GEN-LAST:event_buttonExitActionPerformed
 
    private void buttonAddNewProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddNewProductActionPerformed
-      ProductEditor addProduct = new ProductEditor(this, true);
-		addProduct.setLocationRelativeTo(this);
-		addProduct.setVisible(true);
+        ProductEditor addProduct = new ProductEditor(this, true);
+        addProduct.setLocationRelativeTo(this);
+	addProduct.setVisible(true);
    }//GEN-LAST:event_buttonAddNewProductActionPerformed
 
    private void buttonViewProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonViewProductsActionPerformed
