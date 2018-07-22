@@ -54,6 +54,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        labelMainMenuTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelMainMenuTitle.setText("Product Administration");
         labelMainMenuTitle.setName("labelMainMenuTitle"); // NOI18N
 
