@@ -70,7 +70,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return productID + ", " + name + ", " + category;
+        return productID + "\t" + name;
                 
     }
 

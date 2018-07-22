@@ -58,10 +58,12 @@ public class Sale {
 
     public BigDecimal getTotal() {
         BigDecimal total = BigDecimal.ZERO;
+        
         // Loop through each saleItem, and pull out the price, adding to total
         for (SaleItem item : saleItems) {
             total.add(item.getItemTotal());
         }
+        
         return total;
     }
 

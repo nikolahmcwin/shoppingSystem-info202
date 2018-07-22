@@ -48,8 +48,7 @@ public class SaleItem {
     @Override
     public String toString() {
         return "SaleItem{" + "quantityPurchased=" + quantityPurchased
-                + ", salePrice=" + salePrice + ", saleProduct=" + saleProduct
-                + ", sale=" + sale + '}';
+                + ", salePrice=" + salePrice;
     }
 
     public BigDecimal getItemTotal() {
