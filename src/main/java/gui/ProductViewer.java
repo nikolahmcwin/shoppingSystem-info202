@@ -5,11 +5,19 @@
  */
 package gui;
 
+import dao.ProductStorer;
+import domain.Product;
+import gui.helpers.SimpleListModel;
+import java.util.List;
+
 /**
  *
  * @author peani371
  */
 public class ProductViewer extends javax.swing.JDialog {
+    
+    private ProductStorer pStore = new ProductStorer();
+    private SimpleListModel productDisplay = new SimpleListModel();
 
     /**
      * Creates new form ProductViewer
@@ -17,6 +25,13 @@ public class ProductViewer extends javax.swing.JDialog {
     public ProductViewer(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        // Pull out all products stored and add to the List to display
+        List<Product> allProducts = pStore.getProducts();
+        productDisplay.updateItems(allProducts);
+        //comboCategoryFilter.setModel(productDisplay);
+        listProductDisplay.setModel(productDisplay);
+       
     }
 
     /**
@@ -28,10 +43,10 @@ public class ProductViewer extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        labelSearchByID = new javax.swing.JLabel();
+        labelCategoryFilter = new javax.swing.JLabel();
         buttonSearch = new javax.swing.JButton();
-        txtCategoryFilter = new javax.swing.JComboBox<>();
+        comboCategoryFilter = new javax.swing.JComboBox<>();
         txtSearchID = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         listProductDisplay = new javax.swing.JList<>();
@@ -41,13 +56,13 @@ public class ProductViewer extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Search by ID");
+        labelSearchByID.setText("Search by ID");
 
-        jLabel2.setText("Category Filter");
+        labelCategoryFilter.setText("Category Filter");
 
         buttonSearch.setText("Search");
 
-        txtCategoryFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboCategoryFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         listProductDisplay.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -76,15 +91,15 @@ public class ProductViewer extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(labelSearchByID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtSearchID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonSearch))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(labelCategoryFilter)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCategoryFilter, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(comboCategoryFilter, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -97,13 +112,13 @@ public class ProductViewer extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(labelSearchByID)
                     .addComponent(buttonSearch)
                     .addComponent(txtSearchID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtCategoryFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelCategoryFilter)
+                    .addComponent(comboCategoryFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -168,11 +183,11 @@ public class ProductViewer extends javax.swing.JDialog {
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonEdit;
     private javax.swing.JButton buttonSearch;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JComboBox<String> comboCategoryFilter;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelCategoryFilter;
+    private javax.swing.JLabel labelSearchByID;
     private javax.swing.JList<String> listProductDisplay;
-    private javax.swing.JComboBox<String> txtCategoryFilter;
     private javax.swing.JTextField txtSearchID;
     // End of variables declaration//GEN-END:variables
 }

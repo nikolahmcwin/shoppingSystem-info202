@@ -26,7 +26,7 @@ public class MainMenu extends javax.swing.JFrame {
         buttonViewProducts = new javax.swing.JButton();
         buttonExit = new javax.swing.JButton();
         buttonAddNewProduct = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        labelMainMenuTitle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,8 +54,8 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Product Administration");
-        jLabel1.setName("jLabel1"); // NOI18N
+        labelMainMenuTitle.setText("Product Administration");
+        labelMainMenuTitle.setName("labelMainMenuTitle"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,7 +64,7 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelMainMenuTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonViewProducts, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                     .addComponent(buttonExit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                     .addComponent(buttonAddNewProduct, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
@@ -74,7 +74,7 @@ public class MainMenu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                .addComponent(labelMainMenuTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonAddNewProduct)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -142,6 +142,6 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton buttonAddNewProduct;
     private javax.swing.JButton buttonExit;
     private javax.swing.JButton buttonViewProducts;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel labelMainMenuTitle;
     // End of variables declaration//GEN-END:variables
 }

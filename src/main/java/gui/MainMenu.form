@@ -26,7 +26,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jLabel1" max="32767" attributes="0"/>
+                  <Component id="labelMainMenuTitle" max="32767" attributes="0"/>
                   <Component id="buttonViewProducts" alignment="0" pref="227" max="32767" attributes="0"/>
                   <Component id="buttonExit" alignment="0" pref="227" max="32767" attributes="0"/>
                   <Component id="buttonAddNewProduct" alignment="0" pref="227" max="32767" attributes="0"/>
@@ -39,7 +39,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="jLabel1" pref="41" max="32767" attributes="0"/>
+              <Component id="labelMainMenuTitle" pref="41" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="buttonAddNewProduct" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -79,10 +79,10 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAddNewProductActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="labelMainMenuTitle">
       <Properties>
         <Property name="text" type="java.lang.String" value="Product Administration"/>
-        <Property name="name" type="java.lang.String" value="jLabel1" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="labelMainMenuTitle" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>

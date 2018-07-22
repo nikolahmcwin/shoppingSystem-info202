@@ -16,6 +16,7 @@ import java.util.List;
 public class ProductStorer {
 
     private static List<Product> products = new ArrayList<>();
+    // Add a set of categories, cos it removes duplicates. Hash set or tree set.
 
     public void saveProduct(Product newProd) {
         products.add(newProd);
