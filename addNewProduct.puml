@@ -1,3 +1,48 @@
 @startuml
-A -> B : do stuff
+
+' use strict UML mode
+skinparam style strictuml
+
+actor "User" as user
+participant "BookEditor" as editor <<dialog>>
+'participant "Book" as book <<domain>>
+
+
+' activate editor constructor
+editor++
+
+' create a DAO
+create "BookListDAO" as dao <<DAO>>
+editor -> dao : construct 
+editor--
+
+
+user -> editor++ : enters book details
+editor--
+
+user -> editor++ : clicks save button
+
+'editor -> book : getName()
+'return name
+
+create "Book" as book <<domain>>
+editor -> book : construct(author)
+
+'editor -> book++ : setAuthor(author)
+'book--
+
+editor -> editor : getText() : author
+
+editor -> book++ : setAuthor(author)
+book--
+
+editor -> dao++ : save(book)
+
+dao--
+
+
+' dispose dialog
+editor -> editor : dispose()
+destroy editor
+
 @enduml
