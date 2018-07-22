@@ -14,9 +14,9 @@ import java.util.List;
  * @author peani371
  */
 public class ProductStorer {
-    
+
     private static List<Product> products = new ArrayList<>();
-    
+
     public void saveProduct(Product newProd) {
         products.add(newProd);
     }

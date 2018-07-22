@@ -5,6 +5,7 @@
  */
 package gui;
 
+import dao.ProductStorer;
 import java.math.BigDecimal;
 import domain.Product;
 
@@ -13,6 +14,8 @@ import domain.Product;
  * @author peani371
  */
 public class ProductEditor extends javax.swing.JDialog {
+
+    private ProductStorer pStore = new ProductStorer();
 
     /**
      * Creates new form ProductEditor
@@ -152,8 +155,8 @@ public class ProductEditor extends javax.swing.JDialog {
    }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
-        
-		 // Pull out the text from the entry fields
+
+        // Pull out the text from the entry fields
         String inputID = txtID.getText();
         String inputName = txtName.getText();
         String inputDescription = txtDescription.getText();
@@ -161,24 +164,26 @@ public class ProductEditor extends javax.swing.JDialog {
         String inputPrice = txtPrice.getText();
         String inputQuantity = txtQuantity.getText();
 
-		  // Convert the two numbers from their String representation
+        // Convert the two numbers from their String representation
         Integer intQuantity = new Integer(inputQuantity);
         BigDecimal bdPrice = new BigDecimal(inputPrice);
-        
-		  // Create a new Product instance
+
+        // Create a new Product instance
         Product newProd = new Product();
-        
-		  // Set all the Product fields to those from the form
+
+        // Set all the Product fields to those from the form
         newProd.setProductID(inputID);
         newProd.setName(inputName);
         newProd.setDescription(inputDescription);
         newProd.setCategory(inputCategory);
         newProd.setPrice(bdPrice);
         newProd.setQuantityInStock(intQuantity);
-        
-		  // Print the new Product to the console, confirming entry
+
+        // Print the new Product to the console, confirming entry
         System.out.println(newProd.toString());
-        
+
+        pStore.saveProduct(newProd);
+
     }//GEN-LAST:event_buttonSaveActionPerformed
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
