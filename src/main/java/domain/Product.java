@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * @author peani371
  */
 public class Product {
-    
+
     private String productID;
     private String name;
     private String description;
@@ -73,6 +73,4 @@ public class Product {
         return "Product{" + "productID=" + productID + ", name=" + name + '}';
     }
 
- 
-    
 }

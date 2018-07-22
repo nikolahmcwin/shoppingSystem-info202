@@ -12,12 +12,12 @@ import gui.MainMenu;
  * @author peani371
  */
 public class Administration {
-    
+
     public static void main(String[] args) {
-		 
+
         MainMenu menu = new MainMenu();
         menu.setLocationRelativeTo(null);
-	menu.setVisible(true);
+        menu.setVisible(true);
     }
-    
+
 }

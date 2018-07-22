@@ -7,58 +7,55 @@ import java.math.BigDecimal;
  * @author peani371
  */
 public class SaleItem {
-	
-	private Integer quantityPurchased;
-	private BigDecimal salePrice;
-	private Product saleProduct;
-	private Sale sale;
 
-	public Integer getQuantityPurchased() {
-		return quantityPurchased;
-	}
+    private Integer quantityPurchased;
+    private BigDecimal salePrice;
+    private Product saleProduct;
+    private Sale sale;
 
-	public BigDecimal getSalePrice() {
-		return salePrice;
-	}
+    public Integer getQuantityPurchased() {
+        return quantityPurchased;
+    }
 
-	public Product getSaleProduct() {
-		return saleProduct;
-	}
+    public BigDecimal getSalePrice() {
+        return salePrice;
+    }
 
-	public Sale getSale() {
-		return sale;
-	}
+    public Product getSaleProduct() {
+        return saleProduct;
+    }
 
-	public void setQuantityPurchased(Integer quantityPurchased) {
-		this.quantityPurchased = quantityPurchased;
-	}
+    public Sale getSale() {
+        return sale;
+    }
 
-	public void setSalePrice(BigDecimal salePrice) {
-		this.salePrice = salePrice;
-	}
+    public void setQuantityPurchased(Integer quantityPurchased) {
+        this.quantityPurchased = quantityPurchased;
+    }
 
-	public void setSaleProduct(Product saleProduct) {
-		this.saleProduct = saleProduct;
-	}
+    public void setSalePrice(BigDecimal salePrice) {
+        this.salePrice = salePrice;
+    }
 
-	public void setSaleID(Sale sale) {
-		this.sale = sale;
-	}
+    public void setSaleProduct(Product saleProduct) {
+        this.saleProduct = saleProduct;
+    }
 
-	@Override
-	public String toString() {
-		return "SaleItem{" + "quantityPurchased=" + quantityPurchased + 
-				  ", salePrice=" + salePrice + ", saleProduct=" + saleProduct 
-				  + ", sale=" + sale + '}';
-	}
-	
-	public BigDecimal getItemTotal() {
-		BigDecimal quantity = new BigDecimal(quantityPurchased);
-		BigDecimal itemTotal = quantity.multiply(salePrice);
-		return itemTotal;
-	}
+    public void setSaleID(Sale sale) {
+        this.sale = sale;
+    }
 
-	
-	
-	
+    @Override
+    public String toString() {
+        return "SaleItem{" + "quantityPurchased=" + quantityPurchased
+                + ", salePrice=" + salePrice + ", saleProduct=" + saleProduct
+                + ", sale=" + sale + '}';
+    }
+
+    public BigDecimal getItemTotal() {
+        BigDecimal quantity = new BigDecimal(quantityPurchased);
+        BigDecimal itemTotal = quantity.multiply(salePrice);
+        return itemTotal;
+    }
+
 }
