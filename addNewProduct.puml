@@ -4,44 +4,52 @@
 skinparam style strictuml
 
 actor "User" as user
-participant "BookEditor" as editor <<dialog>>
-'participant "Book" as book <<domain>>
 
+' create main adminstration 
+participant "Administration" as main <<main>>
+main++
+
+' create main menu frame
+create "MainMenu" as menu <<frame>>
+main -> menu : construct
+
+user -> menu++ : clicks 'Add New Product' button
+
+' create product editor dialog
+create "ProductEditor" as editor <<dialog>>
+menu -> editor : construct
 
 ' activate editor constructor
 editor++
 
 ' create a DAO
-create "BookListDAO" as dao <<DAO>>
+create "ProductListDAO" as dao <<DAO>>
 editor -> dao : construct 
 editor--
 
-
-user -> editor++ : enters book details
+' user enters product details and clicks the save product button
+user -> editor++ : enters product details
 editor--
+user -> editor++ : clicks 'Save' button
 
-user -> editor++ : clicks save button
+editor -> editor : get product details from multiple GUI components
+editor -> editor : convert number values from String to BigDecimal and Integer
 
-'editor -> book : getName()
-'return name
+' create a Product
+create "Product" as product <<domain>>
+editor -> product : construct
 
-create "Book" as book <<domain>>
-editor -> book : construct(author)
+editor -> product++ : set multiple fields using setters
+product-- 
 
-'editor -> book++ : setAuthor(author)
-'book--
+editor -> product++ : System.out.println(product)
+product--
 
-editor -> editor : getText() : author
-
-editor -> book++ : setAuthor(author)
-book--
-
-editor -> dao++ : save(book)
-
+editor -> dao++ : save(product)
 dao--
 
-
 ' dispose dialog
+user -> editor++ : clicks 'Cancel' button
 editor -> editor : dispose()
 destroy editor
 
