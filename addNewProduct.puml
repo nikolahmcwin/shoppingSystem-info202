@@ -3,6 +3,7 @@
 ' use strict UML mode
 skinparam style strictuml
 
+' create actor user
 actor "User" as user
 
 ' create main adminstration 
@@ -19,27 +20,29 @@ user -> menu++ : clicks 'Add New Product' button
 create "ProductEditor" as editor <<dialog>>
 menu -> editor : construct
 
-' activate editor constructor
 editor++
 
 ' create a DAO
 create "ProductListDAO" as dao <<DAO>>
 editor -> dao : construct 
+
 editor--
 
 ' user enters product details and clicks the save product button
 user -> editor++ : enters product details
 editor--
+
 user -> editor++ : clicks 'Save' button
 
-editor -> editor : get product details from multiple GUI components
-editor -> editor : convert number values from String to BigDecimal and Integer
+' self interactions to pull text and run conversions
+editor -> editor : use getText() to get attributes from GUI
+editor -> editor : convert number values to BigDecimal and Integer
 
 ' create a Product
 create "Product" as product <<domain>>
 editor -> product : construct
 
-editor -> product++ : set multiple fields using setters
+editor -> product++ : use setters to set product attributes
 product-- 
 
 editor -> product++ : System.out.println(product)
@@ -47,10 +50,16 @@ product--
 
 editor -> dao++ : save(product)
 dao--
+editor--
 
 ' dispose dialog
 user -> editor++ : clicks 'Cancel' button
 editor -> editor : dispose()
+
+' show control returning to menu as editor closes
+editor --> menu 
 destroy editor
+
+menu --> user-- : awaiting next operation
 
 @enduml
