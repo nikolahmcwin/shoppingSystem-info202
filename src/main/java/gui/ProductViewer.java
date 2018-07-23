@@ -8,6 +8,7 @@ package gui;
 import dao.ProductListDAO;
 import domain.Product;
 import gui.helpers.SimpleListModel;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ public class ProductViewer extends javax.swing.JDialog {
     
     private ProductListDAO pStore = new ProductListDAO();
     private SimpleListModel productDisplay = new SimpleListModel();
+    private SimpleListModel categoryDisplay = new SimpleListModel();
 
     /**
      * Creates new form ProductViewer
@@ -27,11 +29,14 @@ public class ProductViewer extends javax.swing.JDialog {
         initComponents();
         
         // Pull out all products stored and add to the List to display
-        List<Product> allProducts = pStore.getProducts();
+        List<Product> allProducts = ProductListDAO.getProducts();
         productDisplay.updateItems(allProducts);
-        //comboCategoryFilter.setModel(productDisplay);
         listProductDisplay.setModel(productDisplay);
-       
+        
+        // Pull out all categories of products and add to the Combo to display
+        HashSet<String> allCategories = ProductListDAO.getCategories();
+        categoryDisplay.updateItems(allCategories);
+        comboCategoryFilter.setModel(categoryDisplay);
     }
 
     /**

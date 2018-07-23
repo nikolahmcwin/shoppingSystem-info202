@@ -8,6 +8,8 @@ package gui;
 import dao.ProductListDAO;
 import java.math.BigDecimal;
 import domain.Product;
+import gui.helpers.SimpleListModel;
+import java.util.HashSet;
 
 /**
  *
@@ -16,6 +18,7 @@ import domain.Product;
 public class ProductEditor extends javax.swing.JDialog {
 
     private ProductListDAO pStore = new ProductListDAO();
+    private SimpleListModel categoryDisplay = new SimpleListModel();
 
     /**
      * Creates new form ProductEditor
@@ -24,6 +27,11 @@ public class ProductEditor extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         txtCategory.setEditable(true);
+        
+        // Pull out all categories of products and add to the Combo to display
+        HashSet<String> allCategories = ProductListDAO.getCategories();
+        categoryDisplay.updateItems(allCategories);
+        txtCategory.setModel(categoryDisplay);
     }
 
     /**

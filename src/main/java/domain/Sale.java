@@ -53,16 +53,18 @@ public class Sale {
 
     @Override
     public String toString() {
-        return "Sale{" + "saleID=" + saleID + ", date=" + date + ", status=" + status + '}';
+        return "Sale{" + "saleID=" + saleID + ", date=" + date 
+                + ", status=" + status + '}';
     }
 
     public BigDecimal getTotal() {
         BigDecimal total = BigDecimal.ZERO;
         
         // Loop through each saleItem, and pull out the price, adding to total
-        for (SaleItem item : saleItems) {
+        //for (SaleItem item : saleItems) {
+        saleItems.forEach((item) -> {
             total.add(item.getItemTotal());
-        }
+        });
         
         return total;
     }
