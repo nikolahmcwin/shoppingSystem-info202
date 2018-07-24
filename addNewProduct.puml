@@ -26,6 +26,17 @@ editor++
 create "ProductListDAO" as dao <<DAO>>
 editor -> dao : construct 
 
+' create the simple model list
+create "SimpleListModel" as modellist <<gui.helpers>>
+editor -> modellist : construct
+
+editor -> dao++ : getCategories() 
+dao --> editor : allCategories
+dao--
+
+editor -> modellist : updateItems(allCategories)
+editor -> editor : setModel(categoryDisplay)
+
 editor--
 
 ' user enters product details and clicks the save product button

@@ -53,8 +53,7 @@ public class SaleItem {
 
     public BigDecimal getItemTotal() {
         BigDecimal quantity = new BigDecimal(quantityPurchased);
-        BigDecimal itemTotal = quantity.multiply(salePrice);
-        return itemTotal;
+        return quantity.multiply(salePrice);
     }
 
 }

@@ -70,8 +70,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return productID + ", " + name;
-                
+        return productID + ", " + name;          
     }
 
 }

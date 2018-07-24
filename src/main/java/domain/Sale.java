@@ -35,6 +35,10 @@ public class Sale {
         return customer;
     }
 
+    public List<SaleItem> getSaleItems() {
+        return saleItems;
+    }
+
     public void setSaleID(String saleID) {
         this.saleID = saleID;
     }
@@ -51,6 +55,10 @@ public class Sale {
         this.customer = customer;
     }
 
+    public void setSaleItems(List<SaleItem> saleItems) {
+        this.saleItems = saleItems;
+    }
+
     @Override
     public String toString() {
         return "Sale{" + "saleID=" + saleID + ", date=" + date 
@@ -61,10 +69,9 @@ public class Sale {
         BigDecimal total = BigDecimal.ZERO;
         
         // Loop through each saleItem, and pull out the price, adding to total
-        //for (SaleItem item : saleItems) {
-        saleItems.forEach((item) -> {
+        for (SaleItem item : saleItems) {
             total.add(item.getItemTotal());
-        });
+        }
         
         return total;
     }

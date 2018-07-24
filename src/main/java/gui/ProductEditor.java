@@ -29,7 +29,7 @@ public class ProductEditor extends javax.swing.JDialog {
         txtCategory.setEditable(true);
         
         // Pull out all categories of products and add to the Combo to display
-        HashSet<String> allCategories = ProductListDAO.getCategories();
+        HashSet<String> allCategories = pStore.getCategories();
         categoryDisplay.updateItems(allCategories);
         txtCategory.setModel(categoryDisplay);
     }
