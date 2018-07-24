@@ -17,26 +17,27 @@ import java.util.List;
  */
 public class ProductViewer extends javax.swing.JDialog {
     
-    private ProductListDAO pStore = new ProductListDAO();
-    private SimpleListModel productDisplay = new SimpleListModel();
-    private SimpleListModel categoryDisplay = new SimpleListModel();
+    private final ProductListDAO pStore = new ProductListDAO();
+    private final SimpleListModel productDisplay = new SimpleListModel();
 
     /**
      * Creates new form ProductViewer
+     * @param parent
+     * @param modal
      */
     public ProductViewer(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         
         // Pull out all products stored and add to the List to display
-        List<Product> allProducts = ProductListDAO.getProducts();
+        List<Product> allProducts = pStore.getProducts();
         productDisplay.updateItems(allProducts);
         listProductDisplay.setModel(productDisplay);
         
         // Pull out all categories of products and add to the Combo to display
-        HashSet<String> allCategories = ProductListDAO.getCategories();
-        categoryDisplay.updateItems(allCategories);
-        comboCategoryFilter.setModel(categoryDisplay);
+        HashSet<String> allCategories = pStore.getCategories();
+        productDisplay.updateItems(allCategories);
+        comboCategoryFilter.setModel(productDisplay);
     }
 
     /**

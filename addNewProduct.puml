@@ -30,11 +30,12 @@ editor -> dao : construct
 create "SimpleListModel" as modellist <<gui.helpers>>
 editor -> modellist : construct
 
-editor -> dao++ : getCategories() 
-dao --> editor : allCategories
+editor -> dao++ : getCategories() : allCategories
 dao--
 
-editor -> modellist : updateItems(allCategories)
+editor -> modellist++ : updateItems(allCategories)
+modellist--
+
 editor -> editor : setModel(categoryDisplay)
 
 editor--

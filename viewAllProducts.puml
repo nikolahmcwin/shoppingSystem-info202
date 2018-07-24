@@ -1,0 +1,64 @@
+@startuml
+
+@startuml
+
+' use strict UML mode
+skinparam style strictuml
+
+' create actor user
+actor "User" as user
+
+' create main adminstration 
+participant "Administration" as main <<main>>
+main++
+
+' create main menu frame
+create "MainMenu" as menu <<frame>>
+main -> menu : construct
+
+user -> menu++ : clicks 'View Products' button
+
+' create product editor dialog
+create "ProductViewer" as viewer <<dialog>>
+menu -> viewer : construct
+
+viewer++
+
+' create a DAO
+create "ProductListDAO" as dao <<DAO>>
+viewer -> dao : construct 
+
+' create the simple model list
+create "SimpleListModel" as modellist <<gui.helpers>>
+viewer -> modellist : construct
+
+viewer -> dao++ : getProducts() : allProducts
+dao--
+
+viewer -> modellist++ : updateItems(allProducts)
+modellist--
+
+viewer -> viewer : setModel(productDisplay)
+
+viewer -> dao++ : getCategories() : allCategories
+dao--
+
+viewer -> modellist++ : updateItems(allCategories)
+modellist--
+
+viewer -> viewer : setModel(productDisplay)
+viewer--
+
+' dispose dialog
+user -> viewer++ : clicks 'Cancel' button
+viewer -> viewer : dispose()
+
+' show control returning to menu as viewer closes
+viewer --> menu 
+destroy viewer
+
+menu --> user-- : awaiting next operation
+
+@enduml
+
+@enduml
