@@ -1,7 +1,5 @@
 @startuml
 
-@startuml
-
 ' use strict UML mode
 skinparam style strictuml
 
@@ -18,7 +16,7 @@ main -> menu : construct
 
 user -> menu++ : clicks 'View Products' button
 
-' create product editor dialog
+' create product viewer dialog
 create "ProductViewer" as viewer <<dialog>>
 menu -> viewer : construct
 
@@ -32,21 +30,23 @@ viewer -> dao : construct
 create "SimpleListModel" as modellist <<gui.helpers>>
 viewer -> modellist : construct
 
+' get the products from dao
 viewer -> dao++ : getProducts() : allProducts
 dao--
 
+' put products in Simple List Model
 viewer -> modellist++ : updateItems(allProducts)
 modellist--
 
+' update list to display products
 viewer -> viewer : setModel(productDisplay)
 
-viewer -> dao++ : getCategories() : allCategories
-dao--
+'viewer -> dao++ : getCategories() : allCategories
+'dao--
+'viewer -> modellist++ : updateItems(allCategories)
+'modellist--
+'viewer -> viewer : setModel(productDisplay)
 
-viewer -> modellist++ : updateItems(allCategories)
-modellist--
-
-viewer -> viewer : setModel(productDisplay)
 viewer--
 
 ' dispose dialog
@@ -58,7 +58,5 @@ viewer --> menu
 destroy viewer
 
 menu --> user-- : awaiting next operation
-
-@enduml
 
 @enduml

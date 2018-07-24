@@ -30,12 +30,15 @@ editor -> dao : construct
 create "SimpleListModel" as modellist <<gui.helpers>>
 editor -> modellist : construct
 
+' retrieve all categories from dao
 editor -> dao++ : getCategories() : allCategories
 dao--
 
+' set Simple Model List with categories
 editor -> modellist++ : updateItems(allCategories)
 modellist--
 
+' update combo box to show categories
 editor -> editor : setModel(categoryDisplay)
 
 editor--
@@ -54,14 +57,17 @@ editor -> editor : convert number values to BigDecimal and Integer
 create "Product" as product <<domain>>
 editor -> product : construct
 
+' set product attributes
 editor -> product++ : use setters to set product attributes
 product-- 
 
-editor -> product++ : System.out.println(product)
-product--
 
+'editor -> editor : System.out.println(product)
+
+' save product to dao
 editor -> dao++ : save(product)
 dao--
+
 editor--
 
 ' dispose dialog
