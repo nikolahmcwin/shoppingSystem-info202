@@ -19,6 +19,7 @@ public class ProductViewer extends javax.swing.JDialog {
     
     private final ProductListDAO pStore = new ProductListDAO();
     private final SimpleListModel productDisplay = new SimpleListModel();
+    private final SimpleListModel categoryDisplay = new SimpleListModel();
 
     /**
      * Creates new form ProductViewer
@@ -36,8 +37,8 @@ public class ProductViewer extends javax.swing.JDialog {
         
         // Pull out all categories of products and add to the Combo to display
         HashSet<String> allCategories = pStore.getCategories();
-        productDisplay.updateItems(allCategories);
-        comboCategoryFilter.setModel(productDisplay);
+        categoryDisplay.updateItems(allCategories);
+        comboCategoryFilter.setModel(categoryDisplay);
     }
 
     /**
