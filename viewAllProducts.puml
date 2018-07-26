@@ -18,7 +18,7 @@ user -> menu++ : clicks 'View Products' button
 
 ' create product viewer dialog
 create "ProductViewer" as viewer <<dialog>>
-menu -> viewer : construct
+menu -> viewer :  construct(this, true)
 
 viewer++
 

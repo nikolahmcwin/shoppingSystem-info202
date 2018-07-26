@@ -18,7 +18,7 @@ user -> menu++ : clicks 'Add New Product' button
 
 ' create product editor dialog
 create "ProductEditor" as editor <<dialog>>
-menu -> editor : construct
+menu -> editor : construct(this, true)
 
 editor++
 
