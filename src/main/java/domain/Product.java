@@ -20,6 +20,10 @@ public class Product {
     private BigDecimal price;
     private Integer quantityInStock;
 
+    public Product() {
+        // Empty default constructor
+    }
+
     public String getProductID() {
         return productID;
     }

@@ -70,8 +70,6 @@ public class ProductViewer extends javax.swing.JDialog {
 
         buttonSearch.setText("Search");
 
-        comboCategoryFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jScrollPane1.setViewportView(listProductDisplay);
 
         buttonEdit.setText("Edit");
@@ -174,7 +172,24 @@ public class ProductViewer extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
-        // TODO add your handling code here:
+
+        if (!listProductDisplay.isSelectionEmpty()) {
+            // Pull the selected product out of the JList
+            Product selectedProd = listProductDisplay.getSelectedValue();
+
+            // Open a product editor dialog
+            ProductEditor editProduct = new ProductEditor(this, true, selectedProd);
+            editProduct.setLocationRelativeTo(this);
+            editProduct.setVisible(true);
+
+            // Update the JList to reflect the changes
+            Collection<Product> updatedProducts = pStore.getProducts();
+            productDisplay.updateItems(updatedProducts);
+            
+            // Also update the ComboBox in case categories have changed
+            Collection<String> newCategories = pStore.getCategories();
+            categoryDisplay.updateItems(newCategories);
+        }
     }//GEN-LAST:event_buttonEditActionPerformed
 
     /**

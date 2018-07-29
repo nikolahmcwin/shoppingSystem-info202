@@ -9,6 +9,7 @@ import dao.ProductListDAO;
 import java.math.BigDecimal;
 import domain.Product;
 import gui.helpers.SimpleListModel;
+import java.awt.Window;
 import java.util.Collection;
 
 /**
@@ -19,12 +20,14 @@ public class ProductEditor extends javax.swing.JDialog {
 
     private ProductListDAO pStore = new ProductListDAO();
     private SimpleListModel categoryDisplay = new SimpleListModel();
+    private Product newProd = new Product();
 
     /**
      * Creates new form ProductEditor
      */
-    public ProductEditor(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public ProductEditor(Window parent, boolean modal) {
+        super(parent);
+        super.setModal(modal);
         initComponents();
         txtCategory.setEditable(true);
         
@@ -32,6 +35,36 @@ public class ProductEditor extends javax.swing.JDialog {
         Collection<String> allCategories = pStore.getCategories();
         categoryDisplay.updateItems(allCategories);
         txtCategory.setModel(categoryDisplay);
+    }
+    
+    /**
+    * Second constructor for Product editor that takes a product
+    */
+    public ProductEditor(Window parent, boolean modal, Product productToEdit) {
+        
+        this(parent, modal);
+        this.newProd = productToEdit;
+        
+        // Pull the Product details out
+        String id = newProd.getProductID();
+        String name = newProd.getName();
+        String description = newProd.getDescription();
+        String category = newProd.getCategory();
+        BigDecimal price = newProd.getPrice();
+        Integer quantity = newProd.getQuantityInStock();
+        
+        // Set the GUI components to be the Product details
+        txtID.setText(id);
+        txtName.setText(name);
+        txtDescription.setText(description);
+        txtCategory.setSelectedItem(category);
+        txtPrice.setText(String.valueOf(price));
+        txtQuantity.setText(String.valueOf(quantity));
+        
+        // Set product ID to be uneditable
+        txtID.setEditable(false);
+        
+        
     }
 
     /**
@@ -174,7 +207,7 @@ public class ProductEditor extends javax.swing.JDialog {
         BigDecimal bdPrice = new BigDecimal(inputPrice);
 
         // Create a new Product instance
-        Product newProd = new Product();
+        //Product newProd = new Product();
 
         // Set all the Product fields to those from the form
         newProd.setProductID(inputID);
