@@ -42,6 +42,8 @@ public class ProductListDAO {
 
     public void deleteProduct(Product oldProd) {
         products.remove(oldProd);
+        productMap.remove(oldProd.getProductID());
+        categoryMultimap.remove(oldProd.getCategory(), oldProd);
     }
 
     public Product searchForProduct(String searchID) {
