@@ -75,6 +75,12 @@ public class ProductViewer extends javax.swing.JDialog {
             }
         });
 
+        comboCategoryFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCategoryFilterActionPerformed(evt);
+            }
+        });
+
         jScrollPane1.setViewportView(listProductDisplay);
 
         buttonEdit.setText("Edit");
@@ -190,7 +196,7 @@ public class ProductViewer extends javax.swing.JDialog {
             // Update the JList to reflect the changes
             Collection<Product> updatedProducts = pStore.getProducts();
             productDisplay.updateItems(updatedProducts);
-            
+
             // Also update the ComboBox in case categories have changed
             Collection<String> newCategories = pStore.getCategories();
             categoryDisplay.updateItems(newCategories);
@@ -200,11 +206,30 @@ public class ProductViewer extends javax.swing.JDialog {
     private void buttonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSearchActionPerformed
         // Pull out the ID to search for
         String searchedID = txtSearchID.getText();
-        
-        // Update the JList to dislay only the search
-        Product searchedProduct = pStore.searchForProduct(searchedID);
-        productDisplay.updateItems(searchedProduct);
+
+        if (searchedID == null) {
+            // None selected, simply display all products
+            Collection<Product> allProducts = pStore.getProducts();
+            productDisplay.updateItems(allProducts);
+        } else {
+            // Update the JList to dislay only the search
+            Product searchedProduct = pStore.searchForProduct(searchedID);
+            productDisplay.updateItems(searchedProduct);
+        }
     }//GEN-LAST:event_buttonSearchActionPerformed
+
+    private void comboCategoryFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCategoryFilterActionPerformed
+        // Pull out whichever category is selected
+        String categorySelected
+                = (String) comboCategoryFilter.getSelectedItem();
+
+        // Filter products on that category
+        Collection<Product> categoryFilteredProducts
+                = pStore.filterProductCategory(categorySelected);
+
+        // Update the JList to display only those products
+        productDisplay.updateItems(categoryFilteredProducts);
+    }//GEN-LAST:event_comboCategoryFilterActionPerformed
 
     /**
      * @param args the command line arguments

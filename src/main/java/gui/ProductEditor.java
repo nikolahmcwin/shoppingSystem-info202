@@ -63,8 +63,6 @@ public class ProductEditor extends javax.swing.JDialog {
         
         // Set product ID to be uneditable
         txtID.setEditable(false);
-        
-        
     }
 
     /**
