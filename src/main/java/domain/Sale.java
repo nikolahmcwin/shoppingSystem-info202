@@ -2,8 +2,8 @@ package domain;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 /**
  *
@@ -17,7 +17,7 @@ public class Sale {
     // Would status be better off as a boolean?
     private String status;
     private Customer customer;
-    private List<SaleItem> saleItems = new ArrayList<>();
+    private Collection<SaleItem> saleItems = new ArrayList<>();
 
     public String getSaleID() {
         return saleID;
@@ -35,7 +35,7 @@ public class Sale {
         return customer;
     }
 
-    public List<SaleItem> getSaleItems() {
+    public Collection<SaleItem> getSaleItems() {
         return saleItems;
     }
 
@@ -55,7 +55,7 @@ public class Sale {
         this.customer = customer;
     }
 
-    public void setSaleItems(List<SaleItem> saleItems) {
+    public void setSaleItems(Collection<SaleItem> saleItems) {
         this.saleItems = saleItems;
     }
 

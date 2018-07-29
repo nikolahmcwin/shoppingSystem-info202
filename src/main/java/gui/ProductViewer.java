@@ -8,8 +8,7 @@ package gui;
 import dao.ProductListDAO;
 import domain.Product;
 import gui.helpers.SimpleListModel;
-import java.util.HashSet;
-import java.util.List;
+import java.util.Collection;
 
 /**
  *
@@ -31,12 +30,12 @@ public class ProductViewer extends javax.swing.JDialog {
         initComponents();
         
         // Pull out all products stored and add to the List to display
-        List<Product> allProducts = pStore.getProducts();
+        Collection<Product> allProducts = pStore.getProducts();
         productDisplay.updateItems(allProducts);
         listProductDisplay.setModel(productDisplay);
         
         // Pull out all categories of products and add to the Combo to display
-        HashSet<String> allCategories = pStore.getCategories();
+        Collection<String> allCategories = pStore.getCategories();
         categoryDisplay.updateItems(allCategories);
         comboCategoryFilter.setModel(categoryDisplay);
     }

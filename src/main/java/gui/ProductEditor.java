@@ -9,7 +9,7 @@ import dao.ProductListDAO;
 import java.math.BigDecimal;
 import domain.Product;
 import gui.helpers.SimpleListModel;
-import java.util.HashSet;
+import java.util.Collection;
 
 /**
  *
@@ -29,7 +29,7 @@ public class ProductEditor extends javax.swing.JDialog {
         txtCategory.setEditable(true);
         
         // Pull out all categories of products and add to the Combo to display
-        HashSet<String> allCategories = pStore.getCategories();
+        Collection<String> allCategories = pStore.getCategories();
         categoryDisplay.updateItems(allCategories);
         txtCategory.setModel(categoryDisplay);
     }
