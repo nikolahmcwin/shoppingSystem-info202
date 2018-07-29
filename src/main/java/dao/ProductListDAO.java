@@ -7,6 +7,8 @@ package dao;
 
 import domain.Product;
 import java.util.Collection;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -18,6 +20,8 @@ public class ProductListDAO {
     private static Collection<Product> products = new HashSet<>();
 
     private static Collection<String> categories = new HashSet<>();
+    
+    private static Map<String, Product> productMap = new HashMap<>(); 
 
     // Add a set of categories, cos it removes duplicates. Hash set or tree set.
     public Collection<String> getCategories() {
@@ -31,6 +35,7 @@ public class ProductListDAO {
     public void saveProduct(Product newProd) {
         products.add(newProd);
         categories.add(newProd.getCategory());
+        productMap.put(newProd.getProductID(), newProd);
     }
 
     public void deleteProduct(Product oldProd) {
