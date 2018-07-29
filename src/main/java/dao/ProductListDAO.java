@@ -41,4 +41,15 @@ public class ProductListDAO {
     public void deleteProduct(Product oldProd) {
         products.remove(oldProd);
     }
+    
+    public Product searchForProduct(String searchID) {
+        
+        // If the product exists, return it
+        if (productMap.containsKey(searchID)) {
+            return productMap.get(searchID);
+        }
+        
+        // Product doesn't exist, return null instead
+        return null;
+    }
 }

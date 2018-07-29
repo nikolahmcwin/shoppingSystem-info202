@@ -69,6 +69,11 @@ public class ProductViewer extends javax.swing.JDialog {
         labelCategoryFilter.setText("Category Filter");
 
         buttonSearch.setText("Search");
+        buttonSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSearchActionPerformed(evt);
+            }
+        });
 
         jScrollPane1.setViewportView(listProductDisplay);
 
@@ -191,6 +196,15 @@ public class ProductViewer extends javax.swing.JDialog {
             categoryDisplay.updateItems(newCategories);
         }
     }//GEN-LAST:event_buttonEditActionPerformed
+
+    private void buttonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSearchActionPerformed
+        // Pull out the ID to search for
+        String searchedID = txtSearchID.getText();
+        
+        // Update the JList to dislay only the search
+        Product searchedProduct = pStore.searchForProduct(searchedID);
+        productDisplay.updateItems(searchedProduct);
+    }//GEN-LAST:event_buttonSearchActionPerformed
 
     /**
      * @param args the command line arguments
