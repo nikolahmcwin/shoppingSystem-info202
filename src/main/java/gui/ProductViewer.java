@@ -70,14 +70,14 @@ public class ProductViewer extends javax.swing.JDialog {
 
         comboCategoryFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        listProductDisplay.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(listProductDisplay);
 
         buttonEdit.setText("Edit");
+        buttonEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEditActionPerformed(evt);
+            }
+        });
 
         buttonClose.setText("Close");
         buttonClose.addActionListener(new java.awt.event.ActionListener() {
@@ -87,6 +87,11 @@ public class ProductViewer extends javax.swing.JDialog {
         });
 
         buttonDelete.setText("Delete");
+        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,6 +147,22 @@ public class ProductViewer extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_buttonCloseActionPerformed
 
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
+        // Pull the selected product out of the JList
+        Product selectedProd = listProductDisplay.getSelectedValue();
+        
+        // Delete the product
+        pStore.deleteProduct(selectedProd);
+        
+        // Update the JList to reflect the changes
+        Collection<Product> updatedProducts = pStore.getProducts();
+        productDisplay.updateItems(updatedProducts);
+    }//GEN-LAST:event_buttonDeleteActionPerformed
+
+    private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonEditActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -193,7 +214,7 @@ public class ProductViewer extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCategoryFilter;
     private javax.swing.JLabel labelSearchByID;
-    private javax.swing.JList<String> listProductDisplay;
+    private javax.swing.JList<Product> listProductDisplay;
     private javax.swing.JTextField txtSearchID;
     // End of variables declaration//GEN-END:variables
 }

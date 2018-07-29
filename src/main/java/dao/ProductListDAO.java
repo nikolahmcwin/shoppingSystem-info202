@@ -20,11 +20,11 @@ public class ProductListDAO {
     private static Collection<String> categories = new HashSet<>();
 
     // Add a set of categories, cos it removes duplicates. Hash set or tree set.
-    public static Collection<String> getCategories() {
+    public Collection<String> getCategories() {
         return categories;
     }
 
-    public static Collection<Product> getProducts() {
+    public Collection<Product> getProducts() {
         return products;
     }
 
