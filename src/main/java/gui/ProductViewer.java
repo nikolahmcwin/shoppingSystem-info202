@@ -9,31 +9,33 @@ import dao.ProductListDAO;
 import domain.Product;
 import gui.helpers.SimpleListModel;
 import java.util.Collection;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author peani371
  */
 public class ProductViewer extends javax.swing.JDialog {
-    
+
     private final ProductListDAO pStore = new ProductListDAO();
     private final SimpleListModel productDisplay = new SimpleListModel();
     private final SimpleListModel categoryDisplay = new SimpleListModel();
 
     /**
      * Creates new form ProductViewer
+     *
      * @param parent
      * @param modal
      */
     public ProductViewer(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         // Pull out all products stored and add to the List to display
         Collection<Product> allProducts = pStore.getProducts();
         productDisplay.updateItems(allProducts);
         listProductDisplay.setModel(productDisplay);
-        
+
         // Pull out all categories of products and add to the Combo to display
         Collection<String> allCategories = pStore.getCategories();
         categoryDisplay.updateItems(allCategories);
@@ -148,15 +150,27 @@ public class ProductViewer extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        // Pull the selected product out of the JList
-        Product selectedProd = listProductDisplay.getSelectedValue();
-        
-        // Delete the product
-        pStore.deleteProduct(selectedProd);
-        
-        // Update the JList to reflect the changes
-        Collection<Product> updatedProducts = pStore.getProducts();
-        productDisplay.updateItems(updatedProducts);
+
+        if (!listProductDisplay.isSelectionEmpty()) {
+            // Pull the selected product out of the JList
+            Product selectedProd = listProductDisplay.getSelectedValue();
+
+            // Ask the user to confirm their deletion
+            int result = JOptionPane.showConfirmDialog(this, "Are you sure you wish"
+                    + " to delete the Product: " + selectedProd.toString() + "?",
+                    "Confirm deletion", JOptionPane.INFORMATION_MESSAGE);
+
+            // Check whether the user confirmed
+            if (result == JOptionPane.YES_OPTION) {
+
+                // Delete the product
+                pStore.deleteProduct(selectedProd);
+
+                // Update the JList to reflect the changes
+                Collection<Product> updatedProducts = pStore.getProducts();
+                productDisplay.updateItems(updatedProducts);
+            }
+        }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
