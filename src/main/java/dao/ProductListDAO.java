@@ -42,6 +42,7 @@ public class ProductListDAO {
 
     public void deleteProduct(Product oldProd) {
         products.remove(oldProd);
+        // doesn't remove from categories as category still exists
         productMap.remove(oldProd.getProductID());
         categoryMultimap.remove(oldProd.getCategory(), oldProd);
     }

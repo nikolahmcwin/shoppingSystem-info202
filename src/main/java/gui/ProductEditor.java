@@ -24,6 +24,8 @@ public class ProductEditor extends javax.swing.JDialog {
 
     /**
      * Creates new form ProductEditor
+     * @param parent
+     * @param modal
      */
     public ProductEditor(Window parent, boolean modal) {
         super(parent);
@@ -39,6 +41,9 @@ public class ProductEditor extends javax.swing.JDialog {
     
     /**
     * Second constructor for Product editor that takes a product
+     * @param parent
+     * @param modal
+     * @param productToEdit
     */
     public ProductEditor(Window parent, boolean modal, Product productToEdit) {
         
@@ -121,8 +126,6 @@ public class ProductEditor extends javax.swing.JDialog {
                 buttonCancelActionPerformed(evt);
             }
         });
-
-        txtCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

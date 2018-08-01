@@ -207,7 +207,7 @@ public class ProductViewer extends javax.swing.JDialog {
         // Pull out the ID to search for
         String searchedID = txtSearchID.getText();
 
-        if (searchedID == null) {
+        if (searchedID.isEmpty()) {
             // None selected, simply display all products
             Collection<Product> allProducts = pStore.getProducts();
             productDisplay.updateItems(allProducts);
@@ -216,6 +216,7 @@ public class ProductViewer extends javax.swing.JDialog {
             Product searchedProduct = pStore.searchForProduct(searchedID);
             productDisplay.updateItems(searchedProduct);
         }
+       
     }//GEN-LAST:event_buttonSearchActionPerformed
 
     private void comboCategoryFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCategoryFilterActionPerformed
