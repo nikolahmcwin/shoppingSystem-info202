@@ -165,9 +165,9 @@ public class ProductViewer extends javax.swing.JDialog {
             Product selectedProd = listProductDisplay.getSelectedValue();
 
             // Ask the user to confirm their deletion
-            int result = JOptionPane.showConfirmDialog(this, "Are you sure you wish"
-                    + " to delete the Product: " + selectedProd.toString() + "?",
-                    "Confirm deletion", JOptionPane.INFORMATION_MESSAGE);
+            int result = JOptionPane.showConfirmDialog(this, "Are you sure you"
+                    + " wish to delete the Product: " + selectedProd.toString()
+                    + "?", "Confirm deletion", JOptionPane.INFORMATION_MESSAGE);
 
             // Check whether the user confirmed
             if (result == JOptionPane.YES_OPTION) {
