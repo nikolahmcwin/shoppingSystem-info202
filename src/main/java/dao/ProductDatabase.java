@@ -41,8 +41,8 @@ public class ProductDatabase implements DAOInterface {
 
     @Override
     public Collection<String> getCategories() {
-        
-        String sql = "select category from Product order by category";
+
+        String sql = "select distinct category from Product order by category";
 
         try (
                 Connection dbCon = JdbcConnection.getConnection(dbURL);
@@ -112,20 +112,20 @@ public class ProductDatabase implements DAOInterface {
     public void saveProduct(Product newProd) {
         String sql = "insert into Product (pid, pname, description, category, "
                 + "price, quantity) values (?, ?, ?, ?, ?, ?)";
-        
+
         try (
                 Connection dbCon = JdbcConnection.getConnection(dbURL);
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
-            
+
             stmt.setString(1, newProd.getProductID());
             stmt.setString(2, newProd.getName());
             stmt.setString(3, newProd.getDescription());
             stmt.setString(4, newProd.getCategory());
             stmt.setBigDecimal(5, newProd.getPrice());
             stmt.setInt(6, newProd.getQuantityInStock());
-            
+
             stmt.executeUpdate();
-            
+
         } catch (SQLException ex) {  // we are forced to catch SQLException
             // don't let the SQLException leak from our DAO encapsulation
             throw new RuntimeException(ex);
@@ -140,13 +140,13 @@ public class ProductDatabase implements DAOInterface {
         try (
                 Connection dbCon = JdbcConnection.getConnection(dbURL);
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
-            
+
             stmt.setString(1, searchID);
-            
+
             ResultSet rs = stmt.executeQuery();
-            
-            if(rs.next()) {
-                
+
+            if (rs.next()) {
+
                 String productID = rs.getString("PID");
                 String name = rs.getString("Pname");
                 String description = rs.getString("Description");
@@ -164,7 +164,7 @@ public class ProductDatabase implements DAOInterface {
                 p.setQuantityInStock(quantityInStock);
 
                 return p;
-                
+
             } else {
                 return null;
             }
@@ -175,5 +175,5 @@ public class ProductDatabase implements DAOInterface {
         }
 
     }
-    
+
 }

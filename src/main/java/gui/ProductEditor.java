@@ -5,7 +5,7 @@
  */
 package gui;
 
-import dao.ProductListDAO;
+import dao.ProductDatabase;
 import java.math.BigDecimal;
 import domain.Product;
 import gui.helpers.SimpleListModel;
@@ -18,7 +18,7 @@ import java.util.Collection;
  */
 public class ProductEditor extends javax.swing.JDialog {
 
-    private ProductListDAO pStore = new ProductListDAO();
+    private ProductDatabase pStore = new ProductDatabase();
     private SimpleListModel categoryDisplay = new SimpleListModel();
     private Product newProd = new Product();
 

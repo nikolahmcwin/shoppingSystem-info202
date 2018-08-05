@@ -5,7 +5,7 @@
  */
 package gui;
 
-import dao.ProductListDAO;
+import dao.ProductDatabase;
 import domain.Product;
 import gui.helpers.SimpleListModel;
 import java.util.Collection;
@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class ProductViewer extends javax.swing.JDialog {
 
-    private final ProductListDAO pStore = new ProductListDAO();
+    private final ProductDatabase pStore = new ProductDatabase();
     private final SimpleListModel productDisplay = new SimpleListModel();
     private final SimpleListModel categoryDisplay = new SimpleListModel();
 
