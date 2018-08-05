@@ -88,11 +88,70 @@ public class ProductDatabase implements DAOInterface {
 
     @Override
     public void saveProduct(Product newProd) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "insert into Product (pid, pname, description, category, "
+                + "price, quantity) values (?, ?, ?, ?, ?, ?)";
+        
+        try (
+                Connection dbCon = JdbcConnection.getConnection(dbURL);
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+            
+            stmt.setString(1, newProd.getProductID());
+            stmt.setString(2, newProd.getName());
+            stmt.setString(3, newProd.getDescription());
+            stmt.setString(4, newProd.getCategory());
+            stmt.setBigDecimal(5, newProd.getPrice());
+            stmt.setInt(6, newProd.getQuantityInStock());
+            
+            stmt.executeUpdate();
+            
+        } catch (SQLException ex) {  // we are forced to catch SQLException
+            // don't let the SQLException leak from our DAO encapsulation
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override
     public Product searchForProduct(String searchID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        String sql = "select * from Product where PID = ?";
+
+        try (
+                Connection dbCon = JdbcConnection.getConnection(dbURL);
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+            
+            stmt.setString(1, searchID);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            if(rs.next()) {
+                
+                String productID = rs.getString("PID");
+                String name = rs.getString("Pname");
+                String description = rs.getString("Description");
+                String category = rs.getString("Category");
+                BigDecimal price = rs.getBigDecimal("Price");
+                Integer quantityInStock = rs.getInt("Quantity");
+
+                Product p = new Product();
+
+                p.setProductID(productID);
+                p.setName(name);
+                p.setDescription(description);
+                p.setCategory(category);
+                p.setPrice(price);
+                p.setQuantityInStock(quantityInStock);
+
+                return p;
+                
+            } else {
+                return null;
+            }
+
+        } catch (SQLException ex) {  // we are forced to catch SQLException
+            // don't let the SQLException leak from our DAO encapsulation
+            throw new RuntimeException(ex);
+        }
+
     }
+    
 }
