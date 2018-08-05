@@ -17,7 +17,7 @@ import java.util.HashSet;
  *
  * @author peani371
  */
-public class ProductListDAO {
+public class ProductListDAO implements DAOInterface {
 
     private static Collection<Product> products = new HashSet<>();
     private static Collection<String> categories = new HashSet<>();
