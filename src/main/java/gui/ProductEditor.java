@@ -11,6 +11,7 @@ import domain.Product;
 import gui.helpers.SimpleListModel;
 import java.awt.Window;
 import java.util.Collection;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +25,7 @@ public class ProductEditor extends javax.swing.JDialog {
 
     /**
      * Creates new form ProductEditor
+     *
      * @param parent
      * @param modal
      */
@@ -32,24 +34,25 @@ public class ProductEditor extends javax.swing.JDialog {
         super.setModal(modal);
         initComponents();
         txtCategory.setEditable(true);
-        
+
         // Pull out all categories of products and add to the Combo to display
         Collection<String> allCategories = pStore.getCategories();
         categoryDisplay.updateItems(allCategories);
         txtCategory.setModel(categoryDisplay);
     }
-    
+
     /**
-    * Second constructor for Product editor that takes a product
+     * Second constructor for Product editor that takes a product
+     *
      * @param parent
      * @param modal
      * @param productToEdit
-    */
+     */
     public ProductEditor(Window parent, boolean modal, Product productToEdit) {
-        
+
         this(parent, modal);
         this.newProd = productToEdit;
-        
+
         // Pull the Product details out
         String id = newProd.getProductID();
         String name = newProd.getName();
@@ -57,7 +60,7 @@ public class ProductEditor extends javax.swing.JDialog {
         String category = newProd.getCategory();
         BigDecimal price = newProd.getPrice();
         Integer quantity = newProd.getQuantityInStock();
-        
+
         // Set the GUI components to be the Product details
         txtID.setText(id);
         txtName.setText(name);
@@ -65,7 +68,7 @@ public class ProductEditor extends javax.swing.JDialog {
         txtCategory.setSelectedItem(category);
         txtPrice.setText(String.valueOf(price));
         txtQuantity.setText(String.valueOf(quantity));
-        
+
         // Set product ID to be uneditable
         txtID.setEditable(false);
     }
@@ -209,7 +212,6 @@ public class ProductEditor extends javax.swing.JDialog {
 
         // Create a new Product instance
         //Product newProd = new Product();
-
         // Set all the Product fields to those from the form
         newProd.setProductID(inputID);
         newProd.setName(inputName);
@@ -221,11 +223,26 @@ public class ProductEditor extends javax.swing.JDialog {
         // Print the new Product to the console, confirming entry
         System.out.println(newProd.toString());
 
-        // Save the product into the DAO
-        pStore.saveProduct(newProd);
-        
-        // Close the dialog to confirm product is saved
-        dispose();
+        // Check if we are editing a product ID that already exists
+        Product checkProd = pStore.searchForProduct(inputID);
+        if (checkProd != null) {
+            
+            int result = JOptionPane.showConfirmDialog(this, "You have entered "
+                    + "a Product ID already in use. Are you sure you wish to "
+                    + "overwrite existing product: " + checkProd.toString() + 
+                    "?", "Confirm overwrite", JOptionPane.INFORMATION_MESSAGE);
+
+            // Check whether the user confirmed
+            if (result == JOptionPane.YES_OPTION) {
+                pStore.saveProduct(newProd);
+                dispose();
+            }
+            
+        } else {
+            // Save the product into the DAO
+            pStore.saveProduct(newProd);
+            dispose();
+        }
     }//GEN-LAST:event_buttonSaveActionPerformed
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
