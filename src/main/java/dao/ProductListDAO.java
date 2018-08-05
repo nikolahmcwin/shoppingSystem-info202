@@ -25,14 +25,17 @@ public class ProductListDAO implements DAOInterface {
     private static Multimap<String, Product> categoryMultimap = HashMultimap.create();
 
     // Add a set of categories, cos it removes duplicates. Hash set or tree set.
+    @Override
     public Collection<String> getCategories() {
         return categories;
     }
 
+    @Override
     public Collection<Product> getProducts() {
         return products;
     }
 
+    @Override
     public void saveProduct(Product newProd) {
         
         // If the old category existed, remove it
@@ -67,6 +70,7 @@ public class ProductListDAO implements DAOInterface {
         categoryMultimap.put(newProd.getCategory(), newProd);
     }
 
+    @Override
     public void deleteProduct(Product oldProd) {
         products.remove(oldProd);
         // doesn't remove from categories as category may still exist
@@ -74,6 +78,7 @@ public class ProductListDAO implements DAOInterface {
         categoryMultimap.remove(oldProd.getCategory(), oldProd);
     }
 
+    @Override
     public Product searchForProduct(String searchID) {
 
         // If the product exists, return it
@@ -84,6 +89,7 @@ public class ProductListDAO implements DAOInterface {
         return null;
     }
 
+    @Override
     public Collection<Product> filterProductCategory(String categoryToFilter) {
         return categoryMultimap.get(categoryToFilter);
     }
