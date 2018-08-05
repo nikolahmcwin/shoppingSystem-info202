@@ -41,7 +41,29 @@ public class ProductDatabase implements DAOInterface {
 
     @Override
     public Collection<String> getCategories() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        String sql = "select category from Product order by category";
+
+        try (
+                Connection dbCon = JdbcConnection.getConnection(dbURL);
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+
+            ResultSet rs = stmt.executeQuery();
+
+            Collection<String> categories = new HashSet<>();
+
+            // While there are more categories, loop and add them to collection
+            while (rs.next()) {
+
+                String category = rs.getString("Category");
+                categories.add(category);
+            }
+
+            return categories;
+
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override
