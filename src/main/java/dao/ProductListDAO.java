@@ -40,16 +40,25 @@ public class ProductListDAO {
         if (test != null) {
             String cat = test.getCategory();
             
+            Collection<Product> testCategories = filterProductCategory(cat);
+            System.out.println("Size of category collectoin: " 
+                    + testCategories.size());
+            
             boolean remove = categoryMultimap.remove(cat, test);
             if (remove) {
-                System.out.println("REMOVED SUCCESSFULLY.");
+                System.out.println("MM REMOVED SUCCESSFULLY.");
             }
             
-            Collection<Product> testCategories = filterProductCategory(cat);
+            
             if (testCategories.size() == 1) {
                 // the old product was the only one in that category - remove it
                 categories.remove(cat);
-            }     
+                System.out.println("REMOVED SUCCESSFULLY.");
+            }   
+            
+            System.out.println("Size of category collectoin AFTER: " 
+                    + testCategories.size());
+            
         }
         
         products.add(newProd);
