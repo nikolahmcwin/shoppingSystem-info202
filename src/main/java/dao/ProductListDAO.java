@@ -39,7 +39,7 @@ public class ProductListDAO implements DAOInterface {
     public void saveProduct(Product newProd) {
         
         // If the old category existed, remove it
-        Product test = searchForProduct(newProd.getProductID());
+        /* Product test = searchForProduct(newProd.getProductID());
         if (test != null) {
             String cat = test.getCategory();
             
@@ -50,9 +50,7 @@ public class ProductListDAO implements DAOInterface {
             boolean remove = categoryMultimap.remove(cat, test);
             if (remove) {
                 System.out.println("MM REMOVED SUCCESSFULLY.");
-            }
-            
-            
+            }s
             if (testCategories.size() == 1) {
                 // the old product was the only one in that category - remove it
                 categories.remove(cat);
@@ -62,7 +60,7 @@ public class ProductListDAO implements DAOInterface {
             System.out.println("Size of category collectoin AFTER: " 
                     + testCategories.size());
             
-        }
+        }*/
         
         products.add(newProd);
         categories.add(newProd.getCategory());
