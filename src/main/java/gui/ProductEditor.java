@@ -198,6 +198,12 @@ public class ProductEditor extends javax.swing.JDialog {
 
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
 
+        //Check whether we are saving a new prod or an existing to be updated
+        boolean editingExistingProduct = false;
+        if (newProd.getProductID() != null) {
+            editingExistingProduct = true;
+        }
+
         // Pull out the text from the entry fields
         String inputID = txtID.getText();
         String inputName = txtName.getText();
@@ -210,8 +216,6 @@ public class ProductEditor extends javax.swing.JDialog {
         Integer intQuantity = new Integer(inputQuantity);
         BigDecimal bdPrice = new BigDecimal(inputPrice);
 
-        // Create a new Product instance
-        //Product newProd = new Product();
         // Set all the Product fields to those from the form
         newProd.setProductID(inputID);
         newProd.setName(inputName);
@@ -223,21 +227,21 @@ public class ProductEditor extends javax.swing.JDialog {
         // Print the new Product to the console, confirming entry
         System.out.println(newProd.toString());
 
-        // Check if we are editing a product ID that already exists
         Product checkProd = pStore.searchForProduct(inputID);
-        if (checkProd != null) {
-            
+        if (!editingExistingProduct && checkProd != null) {
+            // We are attempting to edit a product ID that already exists
+            // and we have created a new product (not simply edited an existing)
             int result = JOptionPane.showConfirmDialog(this, "You have entered "
                     + "a Product ID already in use. Are you sure you wish to "
-                    + "overwrite existing product: " + checkProd.toString() + 
-                    "?", "Confirm overwrite", JOptionPane.INFORMATION_MESSAGE);
+                    + "overwrite existing product: " + checkProd.toString()
+                    + "?", "Confirm overwrite", JOptionPane.INFORMATION_MESSAGE);
 
             // Check whether the user confirmed
             if (result == JOptionPane.YES_OPTION) {
                 pStore.saveProduct(newProd);
                 dispose();
             }
-            
+
         } else {
             // Save the product into the DAO
             pStore.saveProduct(newProd);
@@ -246,7 +250,6 @@ public class ProductEditor extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonSaveActionPerformed
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
-        // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_buttonCancelActionPerformed
 
