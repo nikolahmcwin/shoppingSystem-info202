@@ -198,11 +198,11 @@ public class ProductEditor extends javax.swing.JDialog {
 
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
 
-        //Check whether we are saving a new prod or an existing to be updated
+        /*Check whether we are saving a new prod or an existing to be updated
         boolean editingExistingProduct = false;
         if (newProd.getProductID() != null) {
             editingExistingProduct = true;
-        }
+        }*/
 
         // Pull out the text from the entry fields
         String inputID = txtID.getText();
@@ -227,8 +227,10 @@ public class ProductEditor extends javax.swing.JDialog {
         // Print the new Product to the console, confirming entry
         System.out.println(newProd.toString());
 
+        boolean addingNewProduct = txtID.isEditable();
+        System.out.println("Boolean is: "+ addingNewProduct);
         Product checkProd = pStore.searchForProduct(inputID);
-        if (!editingExistingProduct && checkProd != null) {
+        if (addingNewProduct && checkProd != null) {
             // We are attempting to edit a product ID that already exists
             // and we have created a new product (not simply edited an existing)
             int result = JOptionPane.showConfirmDialog(this, "You have entered "
