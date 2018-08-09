@@ -1,0 +1,113 @@
+@startuml
+
+' use strict UML mode
+skinparam style strictuml
+
+' create actor user
+actor "User" as user
+
+' create main adminstration 
+participant "Administration" as main <<main>>
+main++
+
+' create main menu frame
+create "MainMenu" as menu <<frame>>
+main -> menu : construct
+
+user -> menu++ : clicks 'View Products' button
+
+' create product viewer dialog
+create "ProductViewer" as viewer <<dialog>>
+menu -> viewer :  construct(this, true)
+
+viewer++
+
+' create a DAO
+create "ProductDatabase" as dao <<DAO>>
+viewer -> dao : construct 
+
+' create the simple model list
+create "SimpleListModel" as modellist <<gui.helpers>>
+viewer -> modellist : construct
+
+
+
+' get the products from dao database
+viewer -> dao++ : getProducts()
+'dao -> dao : JdbcConnection.getConnection(dbURL)
+'dao -> dao : dbCon.prepareStatement(sql);
+'dao -> dao : stmt.executeQuery()
+
+create "JdbcConnection" as jdbc <<DAO>>
+dao -> jdbc++ : getConnection(dbURL)
+jdbc --> dao : connection
+jdbc--
+
+dao --> viewer : allProducts
+dao--
+
+' put products in Simple List Model
+viewer -> modellist++ : updateItems(allProducts)
+modellist--
+
+' update list to display products
+viewer -> viewer : setModel(productDisplay)
+viewer--
+
+viewer --> user
+
+' Pull out selected product to edit
+user -> viewer++ : selects a Product and clicks 'Edit' button
+viewer -> viewer : JList.getSelectedValue() : Product
+
+' Create editor dialog and fill in the fields
+create "ProductEditor" as editor <<gui>>
+viewer -> editor++ : construct(this, true, selectedProd)
+
+editor -> editor : use getters to get attributes from Product
+editor -> editor : use setText() to set GUI fields
+editor -> editor : txtID.setEditable(false)
+editor--
+editor --> user
+
+user -> editor++ : edits Product and clicks 'Save' button
+editor -> dao++ : saveProduct(selectedProd)
+
+
+
+dao -> jdbc++ : getConnection(dbURL)
+jdbc--> dao : connection
+jdbc--
+
+dao -> dao : prepareStatement(sql)
+dao -> dao : set attributes into prepared statement
+dao -> dao : executeUpdate()
+dao--
+
+' dispose editor as save is successful
+dao --> editor
+editor -> editor : dispose()
+destroy editor
+
+editor --> viewer
+
+' put products in Simple List Model
+viewer -> modellist++ : updateItems(allProducts)
+modellist--
+
+' update list to display products
+viewer -> viewer : setModel(productDisplay)
+
+viewer --> user
+
+user-> viewer : clicks 'Cancel' button
+viewer -> viewer : dispose()
+
+' show control returning to menu as viewer closes
+viewer --> menu 
+destroy viewer
+
+menu --> user-- : awaiting next operation
+
+
+@enduml
