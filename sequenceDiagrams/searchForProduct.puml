@@ -57,7 +57,8 @@ viewer--
 viewer --> user
 
 ' Pull out selected product to edit
-user -> viewer : enters ID in search field
+user -> viewer++ : enters ID in search field
+viewer--
 user -> viewer++ : clicks 'Search' button
 
 viewer -> viewer : txtSearchID.getText()

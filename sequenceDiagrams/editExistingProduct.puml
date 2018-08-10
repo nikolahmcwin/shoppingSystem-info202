@@ -54,10 +54,12 @@ modellist--
 viewer -> viewer : setModel(productDisplay)
 viewer--
 
-viewer --> user
+'viewer --> user
 
 ' Pull out selected product to edit
-user -> viewer++ : selects a Product and clicks 'Edit' button
+user -> viewer++ : selects a Product 
+viewer--
+user -> viewer++ : clicks 'Edit' button
 viewer -> viewer : JList.getSelectedValue() : Product
 
 ' Create editor dialog and fill in the fields
@@ -68,9 +70,11 @@ editor -> editor : use getters to get attributes from Product
 editor -> editor : use setText() to set GUI fields
 editor -> editor : txtID.setEditable(false)
 editor--
-editor --> user
+'editor --> user
 
-user -> editor++ : edits Product and clicks 'Save' button
+user -> editor++ : edits Product
+editor--
+user -> editor++ : clicks 'Save' button
 editor -> dao++ : saveProduct(selectedProd)
 
 
@@ -95,19 +99,9 @@ editor --> viewer
 viewer -> modellist++ : updateItems(allProducts)
 modellist--
 
-' update list to display products
-viewer -> viewer : setModel(productDisplay)
+viewer -> modellist++ :updateItems(newCategories)
+modellist--
 
-viewer --> user
-
-user-> viewer : clicks 'Cancel' button
-viewer -> viewer : dispose()
-
-' show control returning to menu as viewer closes
-viewer --> menu 
-destroy viewer
-
-menu --> user-- : awaiting next operation
-
+viewer --> user-- : awaiting next operation
 
 @enduml

@@ -80,6 +80,7 @@ dao--
 ' put products in Simple List Model
 viewer -> modellist++ : updateItems(categoryFilteredProducts)
 modellist--
+
 viewer-- 
 
 viewer --> user : awaiting next operation

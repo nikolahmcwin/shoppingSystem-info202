@@ -76,16 +76,10 @@ dao -> dao : prepareStatement(sql)
 dao -> dao : executeUpdate()
 
 dao --> viewer
-viewer --> user 
-viewer--
 
-user-> viewer : clicks 'Cancel' button
-viewer -> viewer : dispose()
+viewer -> modellist++ : updateItems(updatedProducts)
+modellist--
 
-' show control returning to menu as viewer closes
-viewer --> menu 
-destroy viewer
-
-menu --> user-- : awaiting next operation
+viewer --> user-- : awaiting next operation
 
 @enduml
