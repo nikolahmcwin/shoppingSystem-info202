@@ -227,9 +227,6 @@ public class ProductEditor extends javax.swing.JDialog {
         newProd.setPrice(inputPrice);
         newProd.setQuantityInStock(inputQuantity);
 
-        // Print the new Product to the console, confirming entry
-        System.out.println(newProd.toString());
-
         boolean addingNewProduct = txtID.isEditable();
 
         Product checkProd = pStore.searchForProduct(inputID);
@@ -237,20 +234,16 @@ public class ProductEditor extends javax.swing.JDialog {
             // We are attempting to edit a product ID that already exists
             // and we have created a new product (not simply edited an existing)
             int result = JOptionPane.showConfirmDialog(this, "You have entered "
-                    + "a Product ID already in use. Are you sure you wish to "
-                    + "overwrite existing product: " + checkProd.toString()
-                    + "?", "Confirm overwrite", JOptionPane.INFORMATION_MESSAGE);
-
-            // Check whether the user confirmed
-            if (result == JOptionPane.YES_OPTION) {
-                pStore.saveProduct(newProd);
-                dispose();
-            }
-
+                    + "a Product ID already in use. You must enter a different "
+                    + "Product ID.", "Product ID error",
+                    JOptionPane.WARNING_MESSAGE);
         } else {
             // Save the product into the DAO
             pStore.saveProduct(newProd);
             dispose();
+
+            // Print the new Product to the console, confirming entry
+            System.out.println(newProd.toString());
         }
     }//GEN-LAST:event_buttonSaveActionPerformed
 
