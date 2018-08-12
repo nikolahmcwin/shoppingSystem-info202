@@ -12,8 +12,9 @@ CREATE TABLE Product (
     PID varchar(20),
     Pname varchar(50) not null,
     Description varchar(150),
-    Category varchar(50),
-    Price decimal(7,2),
-    Quantity integer,
+    Category varchar(50) not null,
+    Price decimal(7,2) not null,
+    Quantity integer not null,
     constraint Product_PK primary key (PID)
 );
+
