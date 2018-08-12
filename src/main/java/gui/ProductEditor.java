@@ -5,6 +5,7 @@
  */
 package gui;
 
+import dao.DAOException;
 import dao.ProductDatabase;
 import java.math.BigDecimal;
 import domain.Product;
@@ -211,42 +212,50 @@ public class ProductEditor extends javax.swing.JDialog {
 
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
 
-        // Pull out the text from the entry fields
-        String inputID = txtID.getText();
-        String inputName = txtName.getText();
-        String inputDescription = txtDescription.getText();
-        String inputCategory = (String) txtCategory.getSelectedItem();
-        BigDecimal inputPrice = (BigDecimal) txtPrice.getValue();
-        Integer inputQuantity = (Integer) txtQuantity.getValue();
+        try {
+            // Pull out the text from the entry fields
+            String inputID = txtID.getText();
+            String inputName = txtName.getText();
+            String inputDescription = txtDescription.getText();
+            String inputCategory = (String) txtCategory.getSelectedItem();
+            BigDecimal inputPrice = (BigDecimal) txtPrice.getValue();
+            Integer inputQuantity = (Integer) txtQuantity.getValue();
 
-        // Set all the Product fields to those from the form
-        newProd.setProductID(inputID);
-        newProd.setName(inputName);
-        newProd.setDescription(inputDescription);
-        newProd.setCategory(inputCategory);
-        newProd.setPrice(inputPrice);
-        newProd.setQuantityInStock(inputQuantity);
+            // Set all the Product fields to those from the form
+            newProd.setProductID(inputID);
+            newProd.setName(inputName);
+            newProd.setDescription(inputDescription);
+            newProd.setCategory(inputCategory);
+            newProd.setPrice(inputPrice);
+            newProd.setQuantityInStock(inputQuantity);
 
-        boolean addingNewProduct = txtID.isEditable();
+            boolean addingNewProduct = txtID.isEditable();
 
-        Product checkProd = pStore.searchForProduct(inputID);
-        if (addingNewProduct && checkProd != null) {
-            // We are attempting to edit a product ID that already exists
-            // and we have created a new product (not simply edited an existing)
-            int result = JOptionPane.showConfirmDialog(this, "You have entered "
-                    + "a Product ID already in use. You must enter a different "
-                    + "Product ID.", "Product ID error",
-                    JOptionPane.WARNING_MESSAGE);
-        } else {
-            // Save the product into the DAO if it is a valid value
-            if (validHelp.isObjectValid(newProd)) {
-                pStore.saveProduct(newProd);
-                dispose();
+            Product checkProd = pStore.searchForProduct(inputID);
+            if (addingNewProduct && checkProd != null) {
+                // We are attempting to edit a product ID that already exists
+                // and we have created a new product (not simply edited an existing)
+                JOptionPane.showMessageDialog(this, "You have entered "
+                        + "a Product ID already in use. You must enter a different "
+                        + "Product ID.", "Product ID error",
+                        JOptionPane.WARNING_MESSAGE);
+            } else {
+                // Save the product into the DAO if it is a valid value
+                if (validHelp.isObjectValid(newProd)) {
+                    pStore.saveProduct(newProd);
+                    dispose();
 
-                // Print the new Product to the console, confirming entry
-                System.out.println(newProd.toString());
+                    // Print the new Product to the console, confirming entry
+                    System.out.println(newProd.toString());
+                }
             }
+        } catch (DAOException ex) {
+           
+            JOptionPane.showMessageDialog(this, " Database exception thrown: " 
+                    + ex.getMessage(), "Database exception",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
+
     }//GEN-LAST:event_buttonSaveActionPerformed
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed

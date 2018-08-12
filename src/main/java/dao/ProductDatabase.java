@@ -42,7 +42,7 @@ public class ProductDatabase implements DAOInterface {
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            throw new DAOException(ex.getMessage(), ex);
         }
     }
 
@@ -85,7 +85,7 @@ public class ProductDatabase implements DAOInterface {
             return products;
             
         } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            throw new DAOException(ex.getMessage(), ex);
         }
 
     }
@@ -113,7 +113,7 @@ public class ProductDatabase implements DAOInterface {
             return categories;
 
         } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            throw new DAOException(ex.getMessage(), ex);
         }
     }
 
@@ -155,7 +155,7 @@ public class ProductDatabase implements DAOInterface {
             return products;
 
         } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            throw new DAOException(ex.getMessage(), ex);
         }
     }
 
@@ -177,9 +177,8 @@ public class ProductDatabase implements DAOInterface {
 
             stmt.executeUpdate();
 
-        } catch (SQLException ex) {  // we are forced to catch SQLException
-            // don't let the SQLException leak from our DAO encapsulation
-            throw new RuntimeException(ex);
+        } catch (SQLException ex) {
+            throw new DAOException(ex.getMessage(), ex);
         }
     }
 
@@ -220,9 +219,8 @@ public class ProductDatabase implements DAOInterface {
                 return null;
             }
 
-        } catch (SQLException ex) {  // we are forced to catch SQLException
-            // don't let the SQLException leak from our DAO encapsulation
-            throw new RuntimeException(ex);
+        } catch (SQLException ex) {
+            throw new DAOException(ex.getMessage(), ex);
         }
 
     }
