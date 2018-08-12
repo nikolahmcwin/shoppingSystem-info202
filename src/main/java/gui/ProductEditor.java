@@ -238,12 +238,14 @@ public class ProductEditor extends javax.swing.JDialog {
                     + "Product ID.", "Product ID error",
                     JOptionPane.WARNING_MESSAGE);
         } else {
-            // Save the product into the DAO
-            pStore.saveProduct(newProd);
-            dispose();
+            // Save the product into the DAO if it is a valid value
+            if (validHelp.isObjectValid(newProd)) {
+                pStore.saveProduct(newProd);
+                dispose();
 
-            // Print the new Product to the console, confirming entry
-            System.out.println(newProd.toString());
+                // Print the new Product to the console, confirming entry
+                System.out.println(newProd.toString());
+            }
         }
     }//GEN-LAST:event_buttonSaveActionPerformed
 
