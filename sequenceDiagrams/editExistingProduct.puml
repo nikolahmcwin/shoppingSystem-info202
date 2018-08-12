@@ -57,6 +57,7 @@ viewer--
 'viewer --> user
 
 ' Pull out selected product to edit
+viewer --> user
 user -> viewer++ : selects a Product 
 viewer--
 user -> viewer++ : clicks 'Edit' button
@@ -70,7 +71,7 @@ editor -> editor : use getters to get attributes from Product
 editor -> editor : use setText() to set GUI fields
 editor -> editor : txtID.setEditable(false)
 editor--
-'editor --> user
+editor --> user
 
 user -> editor++ : edits Product
 editor--
