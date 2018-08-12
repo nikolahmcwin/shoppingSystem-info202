@@ -46,6 +46,7 @@ public class ProductEditor extends javax.swing.JDialog {
 
         // add a formatter to the price text field
         validHelp.addTypeFormatter(txtPrice, "#0.00", BigDecimal.class);
+        validHelp.addTypeFormatter(txtQuantity, "#0", Integer.class);
     }
 
     /**
@@ -74,7 +75,7 @@ public class ProductEditor extends javax.swing.JDialog {
         txtDescription.setText(description);
         txtCategory.setSelectedItem(category);
         txtPrice.setValue(price);
-        txtQuantity.setText(String.valueOf(quantity));
+        txtQuantity.setValue(quantity);
 
         // Set product ID to be uneditable
         txtID.setEditable(false);
@@ -216,11 +217,7 @@ public class ProductEditor extends javax.swing.JDialog {
         String inputDescription = txtDescription.getText();
         String inputCategory = (String) txtCategory.getSelectedItem();
         BigDecimal inputPrice = (BigDecimal) txtPrice.getValue();
-        String inputQuantity = txtQuantity.getText();
-
-        // Convert the two numbers from their String representation
-        Integer intQuantity = new Integer(inputQuantity);
-       // BigDecimal bdPrice = new BigDecimal(inputPrice);
+        Integer inputQuantity = (Integer) txtQuantity.getValue();
 
         // Set all the Product fields to those from the form
         newProd.setProductID(inputID);
@@ -228,7 +225,7 @@ public class ProductEditor extends javax.swing.JDialog {
         newProd.setDescription(inputDescription);
         newProd.setCategory(inputCategory);
         newProd.setPrice(inputPrice);
-        newProd.setQuantityInStock(intQuantity);
+        newProd.setQuantityInStock(inputQuantity);
 
         // Print the new Product to the console, confirming entry
         System.out.println(newProd.toString());
