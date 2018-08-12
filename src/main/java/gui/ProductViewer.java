@@ -5,6 +5,7 @@
  */
 package gui;
 
+import dao.DAOException;
 import dao.ProductDatabase;
 import domain.Product;
 import gui.helpers.SimpleListModel;
@@ -159,26 +160,32 @@ public class ProductViewer extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonCloseActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
+        try {
+            if (!listProductDisplay.isSelectionEmpty()) {
+                // Pull the selected product out of the JList
+                Product selectedProd = listProductDisplay.getSelectedValue();
 
-        if (!listProductDisplay.isSelectionEmpty()) {
-            // Pull the selected product out of the JList
-            Product selectedProd = listProductDisplay.getSelectedValue();
+                // Ask the user to confirm their deletion
+                int result = JOptionPane.showConfirmDialog(this, "Are you sure you"
+                        + " wish to delete the Product: " + selectedProd.toString()
+                        + "?", "Confirm deletion", JOptionPane.INFORMATION_MESSAGE);
 
-            // Ask the user to confirm their deletion
-            int result = JOptionPane.showConfirmDialog(this, "Are you sure you"
-                    + " wish to delete the Product: " + selectedProd.toString()
-                    + "?", "Confirm deletion", JOptionPane.INFORMATION_MESSAGE);
+                // Check whether the user confirmed
+                if (result == JOptionPane.YES_OPTION) {
 
-            // Check whether the user confirmed
-            if (result == JOptionPane.YES_OPTION) {
+                    // Delete the product
+                    pStore.deleteProduct(selectedProd);
 
-                // Delete the product
-                pStore.deleteProduct(selectedProd);
-
-                // Update the JList to reflect the changes
-                Collection<Product> updatedProducts = pStore.getProducts();
-                productDisplay.updateItems(updatedProducts);
+                    // Update the JList to reflect the changes
+                    Collection<Product> updatedProducts = pStore.getProducts();
+                    productDisplay.updateItems(updatedProducts);
+                }
             }
+        } catch (DAOException ex) {
+
+            JOptionPane.showMessageDialog(this, " Database exception thrown: "
+                    + ex.getMessage(), "Database exception",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
@@ -216,7 +223,7 @@ public class ProductViewer extends javax.swing.JDialog {
             Product searchedProduct = pStore.searchForProduct(searchedID);
             productDisplay.updateItems(searchedProduct);
         }
-       
+
     }//GEN-LAST:event_buttonSearchActionPerformed
 
     private void comboCategoryFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCategoryFilterActionPerformed
