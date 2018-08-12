@@ -9,6 +9,7 @@ import dao.ProductDatabase;
 import java.math.BigDecimal;
 import domain.Product;
 import gui.helpers.SimpleListModel;
+import gui.helpers.ValidationHelper;
 import java.awt.Window;
 import java.util.Collection;
 import javax.swing.JOptionPane;
@@ -21,7 +22,10 @@ public class ProductEditor extends javax.swing.JDialog {
 
     private ProductDatabase pStore = new ProductDatabase();
     private SimpleListModel categoryDisplay = new SimpleListModel();
+
     private Product newProd = new Product();
+
+    private ValidationHelper validHelp = new ValidationHelper();
 
     /**
      * Creates new form ProductEditor
@@ -39,6 +43,9 @@ public class ProductEditor extends javax.swing.JDialog {
         Collection<String> allCategories = pStore.getCategories();
         categoryDisplay.updateItems(allCategories);
         txtCategory.setModel(categoryDisplay);
+
+        // add a formatter to the price text field
+        validHelp.addTypeFormatter(txtPrice, "#0.00", BigDecimal.class);
     }
 
     /**
@@ -66,7 +73,7 @@ public class ProductEditor extends javax.swing.JDialog {
         txtName.setText(name);
         txtDescription.setText(description);
         txtCategory.setSelectedItem(category);
-        txtPrice.setText(String.valueOf(price));
+        txtPrice.setValue(price);
         txtQuantity.setText(String.valueOf(quantity));
 
         // Set product ID to be uneditable
@@ -92,11 +99,11 @@ public class ProductEditor extends javax.swing.JDialog {
         labelCategory = new javax.swing.JLabel();
         labelPrice = new javax.swing.JLabel();
         labelQuantity = new javax.swing.JLabel();
-        txtQuantity = new javax.swing.JTextField();
         buttonSave = new javax.swing.JButton();
         buttonCancel = new javax.swing.JButton();
-        txtPrice = new javax.swing.JTextField();
         txtCategory = new javax.swing.JComboBox<>();
+        txtPrice = new javax.swing.JFormattedTextField();
+        txtQuantity = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -151,13 +158,18 @@ public class ProductEditor extends javax.swing.JDialog {
                     .addComponent(labelID))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtID)
-                    .addComponent(txtName)
-                    .addComponent(txtDescriptionScrollPane)
-                    .addComponent(txtQuantity)
-                    .addComponent(txtPrice)
-                    .addComponent(txtCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(6, 6, 6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtID)
+                            .addComponent(txtName)
+                            .addComponent(txtDescriptionScrollPane)
+                            .addComponent(txtCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(6, 6, 6))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtQuantity, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPrice))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,19 +185,19 @@ public class ProductEditor extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelDesciption)
-                    .addComponent(txtDescriptionScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                    .addComponent(txtDescriptionScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelCategory)
                     .addComponent(txtCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelPrice)
-                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelQuantity)
-                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(buttonCancel)
@@ -198,37 +210,31 @@ public class ProductEditor extends javax.swing.JDialog {
 
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
 
-        /*Check whether we are saving a new prod or an existing to be updated
-        boolean editingExistingProduct = false;
-        if (newProd.getProductID() != null) {
-            editingExistingProduct = true;
-        }*/
-
         // Pull out the text from the entry fields
         String inputID = txtID.getText();
         String inputName = txtName.getText();
         String inputDescription = txtDescription.getText();
         String inputCategory = (String) txtCategory.getSelectedItem();
-        String inputPrice = txtPrice.getText();
+        BigDecimal inputPrice = (BigDecimal) txtPrice.getValue();
         String inputQuantity = txtQuantity.getText();
 
         // Convert the two numbers from their String representation
         Integer intQuantity = new Integer(inputQuantity);
-        BigDecimal bdPrice = new BigDecimal(inputPrice);
+       // BigDecimal bdPrice = new BigDecimal(inputPrice);
 
         // Set all the Product fields to those from the form
         newProd.setProductID(inputID);
         newProd.setName(inputName);
         newProd.setDescription(inputDescription);
         newProd.setCategory(inputCategory);
-        newProd.setPrice(bdPrice);
+        newProd.setPrice(inputPrice);
         newProd.setQuantityInStock(intQuantity);
 
         // Print the new Product to the console, confirming entry
         System.out.println(newProd.toString());
 
         boolean addingNewProduct = txtID.isEditable();
-        System.out.println("Boolean is: "+ addingNewProduct);
+
         Product checkProd = pStore.searchForProduct(inputID);
         if (addingNewProduct && checkProd != null) {
             // We are attempting to edit a product ID that already exists
@@ -311,7 +317,7 @@ public class ProductEditor extends javax.swing.JDialog {
     private javax.swing.JScrollPane txtDescriptionScrollPane;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPrice;
-    private javax.swing.JTextField txtQuantity;
+    private javax.swing.JFormattedTextField txtPrice;
+    private javax.swing.JFormattedTextField txtQuantity;
     // End of variables declaration//GEN-END:variables
 }

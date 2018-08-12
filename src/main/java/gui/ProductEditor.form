@@ -42,14 +42,23 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txtID" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtName" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtDescriptionScrollPane" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtQuantity" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtPrice" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtCategory" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtID" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtName" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtDescriptionScrollPane" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtCategory" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="txtQuantity" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtPrice" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -69,24 +78,24 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="labelDesciption" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtDescriptionScrollPane" pref="100" max="32767" attributes="0"/>
+                  <Component id="txtDescriptionScrollPane" pref="94" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="labelCategory" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtCategory" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labelPrice" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtPrice" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="labelPrice" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtPrice" min="-2" pref="27" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="labelQuantity" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtQuantity" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtQuantity" min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
                   <Component id="buttonCancel" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonSave" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -143,8 +152,6 @@
         <Property name="text" type="java.lang.String" value="Quantity in Stock"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtQuantity">
-    </Component>
     <Component class="javax.swing.JButton" name="buttonSave">
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
@@ -161,8 +168,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCancelActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtPrice">
-    </Component>
     <Component class="javax.swing.JComboBox" name="txtCategory">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -172,6 +177,10 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="txtPrice">
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="txtQuantity">
     </Component>
   </SubComponents>
 </Form>
