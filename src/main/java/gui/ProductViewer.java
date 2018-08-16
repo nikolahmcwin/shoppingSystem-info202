@@ -193,20 +193,27 @@ public class ProductViewer extends javax.swing.JDialog {
 
         if (!listProductDisplay.isSelectionEmpty()) {
             // Pull the selected product out of the JList
-            Product selectedProd = listProductDisplay.getSelectedValue();
+            try {
+                Product selectedProd = listProductDisplay.getSelectedValue();
+                
+                // Open a product editor dialog
+                ProductEditor editProduct = new ProductEditor(this, true, selectedProd);
+                editProduct.setLocationRelativeTo(this);
+                editProduct.setVisible(true);
+                
+                // Update the JList to reflect the changes
+                Collection<Product> updatedProducts = pStore.getProducts();
+                productDisplay.updateItems(updatedProducts);
 
-            // Open a product editor dialog
-            ProductEditor editProduct = new ProductEditor(this, true, selectedProd);
-            editProduct.setLocationRelativeTo(this);
-            editProduct.setVisible(true);
-
-            // Update the JList to reflect the changes
-            Collection<Product> updatedProducts = pStore.getProducts();
-            productDisplay.updateItems(updatedProducts);
-
-            // Also update the ComboBox in case categories have changed
-            Collection<String> newCategories = pStore.getCategories();
-            categoryDisplay.updateItems(newCategories);
+                // Also update the ComboBox in case categories have changed
+                Collection<String> newCategories = pStore.getCategories();
+                categoryDisplay.updateItems(newCategories);
+            }
+            catch (Exception e) {
+                // User clicked edit on empty List Model!
+                // Why is the list model not updating above?
+            }
+            
         }
     }//GEN-LAST:event_buttonEditActionPerformed
 
