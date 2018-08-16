@@ -163,22 +163,26 @@ public class ProductViewer extends javax.swing.JDialog {
         try {
             if (!listProductDisplay.isSelectionEmpty()) {
                 // Pull the selected product out of the JList
-                Product selectedProd = listProductDisplay.getSelectedValue();
+                try { Product selectedProd = listProductDisplay.getSelectedValue();
 
-                // Ask the user to confirm their deletion
-                int result = JOptionPane.showConfirmDialog(this, "Are you sure you"
+                    // Ask the user to confirm their deletion
+                    int result = JOptionPane.showConfirmDialog(this, "Are you sure you"
                         + " wish to delete the Product: " + selectedProd.toString()
                         + "?", "Confirm deletion", JOptionPane.INFORMATION_MESSAGE);
 
-                // Check whether the user confirmed
-                if (result == JOptionPane.YES_OPTION) {
+                    // Check whether the user confirmed
+                    if (result == JOptionPane.YES_OPTION) {
 
-                    // Delete the product
-                    pStore.deleteProduct(selectedProd);
+                        // Delete the product
+                        pStore.deleteProduct(selectedProd);
 
-                    // Update the JList to reflect the changes
-                    Collection<Product> updatedProducts = pStore.getProducts();
-                    productDisplay.updateItems(updatedProducts);
+                        // Update the JList to reflect the changes
+                        Collection<Product> updatedProducts = pStore.getProducts();
+                        productDisplay.updateItems(updatedProducts);
+                    }
+                } catch (Exception e) {
+                    // User clicked edit on empty List Model!
+                    // Why is the list model not updating after EDIT above?
                 }
             }
         } catch (DAOException ex) {
