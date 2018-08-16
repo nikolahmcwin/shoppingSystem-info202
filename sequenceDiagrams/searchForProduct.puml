@@ -34,9 +34,6 @@ viewer -> modellist : construct
 
 ' get the products from dao database
 viewer -> dao++ : getProducts()
-'dao -> dao : JdbcConnection.getConnection(dbURL)
-'dao -> dao : dbCon.prepareStatement(sql);
-'dao -> dao : stmt.executeQuery()
 
 create "JdbcConnection" as jdbc <<DAO>>
 dao -> jdbc++ : getConnection(dbURL)
@@ -77,7 +74,6 @@ dao -> dao : use setters to set product attributes
 dao --> viewer : searchedProduct
 
 dao--
-
 
 ' put products in Simple List Model
 viewer -> modellist++ : updateItems(searchedProduct)
