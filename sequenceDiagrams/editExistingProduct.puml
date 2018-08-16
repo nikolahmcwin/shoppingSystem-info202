@@ -60,6 +60,9 @@ viewer -> viewer : JList.getSelectedValue() : Product
 create "ProductEditor" as editor <<gui>>
 viewer -> editor++ : construct(this, true, selectedProd)
 
+create "ValidatorHelper" as validator <<gui>>
+editor -> validator : construct
+
 editor -> editor : use getters to get attributes from Product
 editor -> editor : use setText() to set GUI fields
 editor -> editor : txtID.setEditable(false)
@@ -70,6 +73,9 @@ user -> editor++ : edits Product
 editor--
 user -> editor++ : clicks 'Save' button
 editor -> dao++ : saveProduct(selectedProd)
+
+editor -> validator++ : isValid(product)
+return valid
 
 dao -> jdbc++ : getConnection(dbURL)
 jdbc--> dao : connection
