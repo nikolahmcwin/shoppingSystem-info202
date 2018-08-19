@@ -6,6 +6,7 @@
 package gui;
 
 import dao.DAOException;
+import dao.DAOInterface;
 import dao.ProductDatabase;
 import java.math.BigDecimal;
 import domain.Product;
@@ -21,22 +22,23 @@ import javax.swing.JOptionPane;
  */
 public class ProductEditor extends javax.swing.JDialog {
 
-    private ProductDatabase pStore = new ProductDatabase();
-    private SimpleListModel categoryDisplay = new SimpleListModel();
-
+    //private final ProductDatabase pStore = new ProductDatabase();
+    private final DAOInterface pStore;
+    private final SimpleListModel categoryDisplay = new SimpleListModel();
     private Product newProd = new Product();
-
-    private ValidationHelper validHelp = new ValidationHelper();
+    private final ValidationHelper validHelp = new ValidationHelper();
 
     /**
      * Creates new form ProductEditor
      *
      * @param parent
      * @param modal
+     * @param dao
      */
-    public ProductEditor(Window parent, boolean modal) {
+    public ProductEditor(Window parent, boolean modal, DAOInterface dao) {
         super(parent);
         super.setModal(modal);
+        pStore = dao;
         initComponents();
         txtCategory.setEditable(true);
 
@@ -56,10 +58,12 @@ public class ProductEditor extends javax.swing.JDialog {
      * @param parent
      * @param modal
      * @param productToEdit
+     * @param dao
      */
-    public ProductEditor(Window parent, boolean modal, Product productToEdit) {
+    public ProductEditor(Window parent, boolean modal, Product productToEdit, 
+            DAOInterface dao) {
 
-        this(parent, modal);
+        this(parent, modal, dao);
         this.newProd = productToEdit;
 
         // Pull the Product details out
@@ -261,48 +265,6 @@ public class ProductEditor extends javax.swing.JDialog {
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         dispose();
     }//GEN-LAST:event_buttonCancelActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProductEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProductEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProductEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProductEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ProductEditor dialog = new ProductEditor(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancel;

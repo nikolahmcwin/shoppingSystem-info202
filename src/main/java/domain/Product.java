@@ -6,6 +6,7 @@
 package domain;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import net.sf.oval.constraint.Length;
 import net.sf.oval.constraint.Max;
 import net.sf.oval.constraint.NotBlank;
@@ -100,6 +101,31 @@ public class Product {
     @Override
     public String toString() {
         return productID + ", " + name;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 61 * hash + Objects.hashCode(this.productID);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Product other = (Product) obj;
+        if (!Objects.equals(this.productID, other.productID)) {
+            return false;
+        }
+        return true;
     }
 
 }

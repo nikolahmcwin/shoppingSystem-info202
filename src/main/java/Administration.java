@@ -1,4 +1,6 @@
 
+import dao.DAOInterface;
+import dao.ProductDatabase;
 import gui.MainMenu;
 
 /*
@@ -15,7 +17,8 @@ public class Administration {
 
     public static void main(String[] args) {
 
-        MainMenu menu = new MainMenu();
+        DAOInterface dao = new ProductDatabase();
+        MainMenu menu = new MainMenu(dao);
         menu.setLocationRelativeTo(null);
         menu.setVisible(true);
     }
