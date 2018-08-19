@@ -19,7 +19,9 @@ import static org.junit.Assert.*;
  */
 public class DaoTest {
 
-    private DAOInterface dao = new ProductListDAO();
+    //private DAOInterface dao = new ProductListDAO();
+    private DAOInterface dao =
+            new ProductDatabase("jdbc:h2:tcp://localhost:9047/project-testing");
 
     private Product prodOne;
     private Product prodTwo;
