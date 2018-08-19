@@ -48,7 +48,7 @@ public class ProductDatabase implements DAOInterface {
 
     @Override
     public Collection<Product> filterProductCategory(String categoryToFilter) {
-        String sql = "select * from product where category = ?";
+        String sql = "select * from product where category = ? order by PID";
 
         try (
                 Connection dbCon = JdbcConnection.getConnection(dbURL);

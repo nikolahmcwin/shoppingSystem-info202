@@ -19,58 +19,34 @@ import java.util.HashSet;
  */
 public class ProductListDAO implements DAOInterface {
 
-    private static Collection<Product> products = new HashSet<>();
-    private static Collection<String> categories = new HashSet<>();
+//    private static Collection<Product> products = new HashSet<>();
+//    private static Collection<String> categories = new HashSet<>();
     private static Map<String, Product> productMap = new HashMap<>();
     private static Multimap<String, Product> categoryMultimap = HashMultimap.create();
 
     // Add a set of categories, cos it removes duplicates. Hash set or tree set.
     @Override
     public Collection<String> getCategories() {
-        return categories;
+        return categoryMultimap.keySet();
     }
 
     @Override
     public Collection<Product> getProducts() {
-        return products;
+        return productMap.values();
     }
 
     @Override
     public void saveProduct(Product newProd) {
         
-        // If the old category existed, remove it
-        /* Product test = searchForProduct(newProd.getProductID());
-        if (test != null) {
-            String cat = test.getCategory();
-            
-            Collection<Product> testCategories = filterProductCategory(cat);
-            System.out.println("Size of category collectoin: " 
-                    + testCategories.size());
-            
-            boolean remove = categoryMultimap.remove(cat, test);
-            if (remove) {
-                System.out.println("MM REMOVED SUCCESSFULLY.");
-            }s
-            if (testCategories.size() == 1) {
-                // the old product was the only one in that category - remove it
-                categories.remove(cat);
-                System.out.println("REMOVED SUCCESSFULLY.");
-            }   
-            
-            System.out.println("Size of category collectoin AFTER: " 
-                    + testCategories.size());
-            
-        }*/
-        
-        products.add(newProd);
-        categories.add(newProd.getCategory());
+        //products.add(newProd);
+        //categories.add(newProd.getCategory());
         productMap.put(newProd.getProductID(), newProd);
         categoryMultimap.put(newProd.getCategory(), newProd);
     }
 
     @Override
     public void deleteProduct(Product oldProd) {
-        products.remove(oldProd);
+        //products.remove(oldProd);
         // doesn't remove from categories as category may still exist
         productMap.remove(oldProd.getProductID());
         categoryMultimap.remove(oldProd.getCategory(), oldProd);
