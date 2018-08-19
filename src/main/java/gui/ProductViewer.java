@@ -208,13 +208,15 @@ public class ProductViewer extends javax.swing.JDialog {
                 editProduct.setLocationRelativeTo(this);
                 editProduct.setVisible(true);
                 
+                // Also update the ComboBox in case categories have changed
+                Collection<String> newCategories = pStore.getCategories();
+                categoryDisplay.updateItems(newCategories);                
+                
                 // Update the JList to reflect the changes
                 Collection<Product> updatedProducts = pStore.getProducts();
                 productDisplay.updateItems(updatedProducts);
 
-                // Also update the ComboBox in case categories have changed
-                Collection<String> newCategories = pStore.getCategories();
-                categoryDisplay.updateItems(newCategories);
+
             }
             catch (Exception e) {
                 // User clicked edit on empty List Model!
