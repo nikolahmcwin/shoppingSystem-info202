@@ -7,6 +7,7 @@ package dao;
 
 import domain.Product;
 import java.math.BigDecimal;
+import java.util.Collection;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,4 +51,78 @@ public class DaoTest {
         dao.deleteProduct(prodThree);
     }
 
+    @Test
+    public void testDaoSave() {
+
+        // save the product using DAO
+        dao.saveProduct(prodThree);
+
+        // retrieve the same product via DAO
+        Product retrieved = dao.searchForProduct("3");
+
+        // ensure that the product we saved is the one we got back
+        assertEquals("Retrieved product should be the same",
+                prodThree, retrieved);
+    }
+
+    @Test
+    public void testDaoDelete() {
+        // delete the product via the DAO
+        dao.deleteProduct(prodOne);
+
+        // try to retrieve the deleted product
+        Product retrieved = dao.searchForProduct("1");
+
+        // ensure that the student was not retrieved (should be null)
+        assertNull("Product should no longer exist", retrieved);
+    }
+
+    @Test
+    public void testDaoGetAll() {
+        Collection<Product> products = dao.getProducts();
+
+        // ensure the result includes the two saved products
+        assertTrue("prodOne should exist", products.contains(prodOne));
+        assertTrue("prodTwo should exist", products.contains(prodTwo));
+
+        // ensure the result ONLY includes the two saved products
+        assertEquals("Only 2 products in result", 2, products.size());
+
+        // find prodOne - result is not a map, so we have to scan for it
+        for (Product p : products) {
+            if (p.equals(prodOne)) {
+
+                // ensure that all of the details were correctly retrieved
+                assertEquals(prodOne.getProductID(), p.getProductID());
+                assertEquals(prodOne.getName(), p.getName());
+                assertEquals(prodOne.getDescription(), p.getDescription());
+                assertEquals(prodOne.getCategory(), p.getCategory());
+                assertEquals(prodOne.getPrice(), p.getPrice());
+                assertEquals(prodOne.getQuantityInStock(), p.getQuantityInStock());
+            }
+        }
+    }
+
+    @Test
+    public void testDaoFindById() {
+        // get prodOne using findById method
+        Product retrieved = dao.searchForProduct("1");
+
+        // assert that you got back prodOne, and not another product
+        assertEquals("ProdOne should be equal", retrieved, prodOne);
+
+        // assert that prodOne's details were properly retrieved
+        assertEquals(prodOne.getProductID(), retrieved.getProductID());
+        assertEquals(prodOne.getName(), retrieved.getName());
+        assertEquals(prodOne.getDescription(), retrieved.getDescription());
+        assertEquals(prodOne.getCategory(), retrieved.getCategory());
+        assertEquals(prodOne.getPrice(), retrieved.getPrice());
+        assertEquals(prodOne.getQuantityInStock(), retrieved.getQuantityInStock());
+        
+        // call getById using a non-existent ID
+        Product retrievedNull = dao.searchForProduct("10");
+        
+        // assert that the result is null
+        assertNull("ProdTen should not exist", retrievedNull);
+    }
 }
