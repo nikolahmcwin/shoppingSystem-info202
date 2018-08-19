@@ -50,6 +50,15 @@ public class Product {
         // Empty default constructor
     }
 
+    public Product(String productID, String name, String description, String category, BigDecimal price, Integer quantityInStock) {
+        this.productID = productID;
+        this.name = name;
+        this.description = description;
+        this.category = category;
+        this.price = price;
+        this.quantityInStock = quantityInStock;
+    }
+
     public String getProductID() {
         return productID;
     }
