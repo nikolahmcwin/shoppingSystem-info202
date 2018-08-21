@@ -112,6 +112,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtID">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="txtID" noResource="true"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelName">
       <Properties>
@@ -119,6 +122,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtName">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="txtName" noResource="true"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelDesciption">
       <Properties>
@@ -133,6 +139,7 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
+            <Property name="name" type="java.lang.String" value="txtDescription" noResource="true"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -155,6 +162,7 @@
     <Component class="javax.swing.JButton" name="buttonSave">
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
+        <Property name="name" type="java.lang.String" value="buttonSave" noResource="true"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSaveActionPerformed"/>
@@ -173,14 +181,21 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
+        <Property name="name" type="java.lang.String" value="txtCategory" noResource="true"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtPrice">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="txtPrice" noResource="true"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtQuantity">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="txtQuantity" noResource="true"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

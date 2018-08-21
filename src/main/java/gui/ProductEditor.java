@@ -115,12 +115,17 @@ public class ProductEditor extends javax.swing.JDialog {
 
         labelID.setText("Product ID");
 
+        txtID.setName("txtID"); // NOI18N
+
         labelName.setText("Name");
+
+        txtName.setName("txtName"); // NOI18N
 
         labelDesciption.setText("Description");
 
         txtDescription.setColumns(20);
         txtDescription.setRows(5);
+        txtDescription.setName("txtDescription"); // NOI18N
         txtDescriptionScrollPane.setViewportView(txtDescription);
 
         labelCategory.setText("Category");
@@ -130,6 +135,7 @@ public class ProductEditor extends javax.swing.JDialog {
         labelQuantity.setText("Quantity in Stock");
 
         buttonSave.setText("Save");
+        buttonSave.setName("buttonSave"); // NOI18N
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSaveActionPerformed(evt);
@@ -142,6 +148,12 @@ public class ProductEditor extends javax.swing.JDialog {
                 buttonCancelActionPerformed(evt);
             }
         });
+
+        txtCategory.setName("txtCategory"); // NOI18N
+
+        txtPrice.setName("txtPrice"); // NOI18N
+
+        txtQuantity.setName("txtQuantity"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
