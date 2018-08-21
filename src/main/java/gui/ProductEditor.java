@@ -112,6 +112,7 @@ public class ProductEditor extends javax.swing.JDialog {
         txtQuantity = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setName("editorDialog"); // NOI18N
 
         labelID.setText("Product ID");
 

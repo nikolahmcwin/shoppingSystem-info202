@@ -67,27 +67,34 @@ public class ProductViewer extends javax.swing.JDialog {
         buttonDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setName("viewerDialog"); // NOI18N
 
         labelSearchByID.setText("Search by ID");
 
         labelCategoryFilter.setText("Category Filter");
 
         buttonSearch.setText("Search");
+        buttonSearch.setName("buttonSearch"); // NOI18N
         buttonSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSearchActionPerformed(evt);
             }
         });
 
+        comboCategoryFilter.setName("txtCategory"); // NOI18N
         comboCategoryFilter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboCategoryFilterActionPerformed(evt);
             }
         });
 
+        txtSearchID.setName("txtID"); // NOI18N
+
+        listProductDisplay.setName("lstProducts"); // NOI18N
         jScrollPane1.setViewportView(listProductDisplay);
 
         buttonEdit.setText("Edit");
+        buttonEdit.setName("buttonEdit"); // NOI18N
         buttonEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonEditActionPerformed(evt);
@@ -102,6 +109,7 @@ public class ProductViewer extends javax.swing.JDialog {
         });
 
         buttonDelete.setText("Delete");
+        buttonDelete.setName("buttonDelete"); // NOI18N
         buttonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonDeleteActionPerformed(evt);
