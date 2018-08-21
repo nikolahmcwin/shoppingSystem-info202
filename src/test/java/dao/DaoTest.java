@@ -127,4 +127,19 @@ public class DaoTest {
         // assert that the result is null
         assertNull("ProdTen should not exist", retrievedNull);
     }
+    
+    @Test
+    public void testDaoEditProduct() {
+        // Test you can save an existing product with edited details
+    }
+    
+    @Test
+    public void testDaoGetAllCategories() {
+        
+    }
+    
+    @Test
+    public void testDaoGetProductByCategory() {
+        
+    }
 }

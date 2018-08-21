@@ -58,7 +58,7 @@ public class ProductEditorTest {
     }
 
     @Test
-    public void testEdit() {
+    public void testEditProduct() {
         Product prod1 = new Product("1", "name1", "desc1", "cat1",
                 new BigDecimal("11.00"), new Integer("22"));
 
@@ -97,7 +97,7 @@ public class ProductEditorTest {
     }
 
     @Test
-    public void testSave() {
+    public void testSaveProduct() {
         // create the dialog passing in the mocked DAO
         ProductEditor dialog = new ProductEditor(null, true, dao);
 
@@ -133,5 +133,5 @@ public class ProductEditorTest {
         assertEquals("Ensure the price was saved", new BigDecimal("11"), savedProduct.getPrice());
         assertEquals("Ensure the quantity was saved",  new Integer("22"), savedProduct.getQuantityInStock());
     }
-
+    
 }
