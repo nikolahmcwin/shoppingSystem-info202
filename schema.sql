@@ -18,3 +18,17 @@ CREATE TABLE Product (
     constraint Product_PK primary key (PID)
 );
 
+CREATE SEQUENCE Customer_ID_Seq;
+
+CREATE TABLE Customer (
+    CustomerID bigint default Customer_ID_Seq.nextval,
+    Username varchar(25),
+    Password varchar(25) not null,
+    Firstname varchar(20) not null,
+    Surname varchar(20) not null,
+    Address varchar(100) not null,
+    Email varchar(50) not null unique,
+    CreditCard varchar(40) not null
+    constraint Customer_PK primary key (username)
+);
+
