@@ -27,6 +27,7 @@ public class Server extends Jooby {
         use(new Gzon());
         use(new ProductModule(dao));
         use(new CustomerModule(custDao));
+        use(new AssetModule());
     }
 
     public static void main(String[] args) throws Exception {
