@@ -6,12 +6,12 @@
 package gui;
 
 import dao.DAOException;
-import dao.DAOInterface;
 import dao.ProductDatabase;
 import domain.Product;
 import gui.helpers.SimpleListModel;
 import java.util.Collection;
 import javax.swing.JOptionPane;
+import dao.ProductDAOInterface;
 
 /**
  *
@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 public class ProductViewer extends javax.swing.JDialog {
 
     //private final ProductDatabase pStore = new ProductDatabase();
-    private final DAOInterface pStore;
+    private final ProductDAOInterface pStore;
     private final SimpleListModel productDisplay = new SimpleListModel();
     private final SimpleListModel categoryDisplay = new SimpleListModel();
 
@@ -30,7 +30,7 @@ public class ProductViewer extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public ProductViewer(java.awt.Frame parent, boolean modal, DAOInterface dao) {
+    public ProductViewer(java.awt.Frame parent, boolean modal, ProductDAOInterface dao) {
         super(parent, modal);
         pStore = dao;
         initComponents();

@@ -6,9 +6,9 @@
 package web;
 
 import org.jooby.Jooby;
-import dao.CustomerDAO;
 import domain.Customer;
 import org.jooby.Status;
+import dao.CustomerDAOInterface;
 
 /**
  *
@@ -16,7 +16,7 @@ import org.jooby.Status;
  */
 public class CustomerModule extends Jooby {
 
-    public CustomerModule(CustomerDAO custDao) {
+    public CustomerModule(CustomerDAOInterface custDao) {
         get("/api/customers/:username", (req) -> {
             String username = req.param("username").value();
             return custDao.getCustomer(username);

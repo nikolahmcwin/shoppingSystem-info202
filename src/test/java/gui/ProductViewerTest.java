@@ -1,6 +1,5 @@
 package gui;
 
-import dao.DAOInterface;
 import domain.Product;
 import gui.helpers.SimpleListModel;
 import java.math.BigDecimal;
@@ -21,6 +20,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import dao.ProductDAOInterface;
 
 /**
  *
@@ -28,7 +28,7 @@ import org.mockito.stubbing.Answer;
  */
 public class ProductViewerTest {
 
-    private DAOInterface dao;
+    private ProductDAOInterface dao;
     private DialogFixture fixture;
     private Robot robot;
     private Product prodOne;
@@ -53,7 +53,7 @@ public class ProductViewerTest {
         products.add(prodOne);
         products.add(prodTwo);
 
-        dao = mock(DAOInterface.class);
+        dao = mock(ProductDAOInterface.class);
         when(dao.getProducts()).thenReturn(products);
         
         /*

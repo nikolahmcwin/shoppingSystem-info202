@@ -6,7 +6,6 @@
 package gui;
 
 import dao.DAOException;
-import dao.DAOInterface;
 import dao.ProductDatabase;
 import java.math.BigDecimal;
 import domain.Product;
@@ -15,6 +14,7 @@ import gui.helpers.ValidationHelper;
 import java.awt.Window;
 import java.util.Collection;
 import javax.swing.JOptionPane;
+import dao.ProductDAOInterface;
 
 /**
  *
@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
 public class ProductEditor extends javax.swing.JDialog {
 
     //private final ProductDatabase pStore = new ProductDatabase();
-    private final DAOInterface pStore;
+    private final ProductDAOInterface pStore;
     private final SimpleListModel categoryDisplay = new SimpleListModel();
     private Product newProd = new Product();
     private final ValidationHelper validHelp = new ValidationHelper();
@@ -35,7 +35,7 @@ public class ProductEditor extends javax.swing.JDialog {
      * @param modal
      * @param dao
      */
-    public ProductEditor(Window parent, boolean modal, DAOInterface dao) {
+    public ProductEditor(Window parent, boolean modal, ProductDAOInterface dao) {
         super(parent);
         super.setModal(modal);
         pStore = dao;
@@ -61,7 +61,7 @@ public class ProductEditor extends javax.swing.JDialog {
      * @param dao
      */
     public ProductEditor(Window parent, boolean modal, Product productToEdit, 
-            DAOInterface dao) {
+            ProductDAOInterface dao) {
 
         this(parent, modal, dao);
         this.newProd = productToEdit;

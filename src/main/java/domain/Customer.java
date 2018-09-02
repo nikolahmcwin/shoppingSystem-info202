@@ -11,7 +11,7 @@ package domain;
  */
 public class Customer {
 
-    private String personID;
+    private Integer personID;
     private String username;
     private String firstName;
     private String surname;
@@ -20,7 +20,7 @@ public class Customer {
     private String emailAddress;
     private String creditCardDetails;
 
-    public void setPersonID(String personID) {
+    public void setPersonID(Integer personID) {
         this.personID = personID;
     }
 
@@ -52,7 +52,7 @@ public class Customer {
         this.creditCardDetails = creditCardDetails;
     }
 
-    public String getPersonID() {
+    public Integer getPersonID() {
         return personID;
     }
 
@@ -86,7 +86,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" + "personID=" + personID + ", firstName=" 
+        return "Customer{" + "username=" + username + ", firstName=" 
                 + firstName + ", surname=" + surname + '}';
     }
 

@@ -1,6 +1,6 @@
 package gui;
 
-import dao.DAOInterface;
+import dao.ProductDAOInterface;
 
 /**
  *
@@ -8,12 +8,12 @@ import dao.DAOInterface;
  */
 public class MainMenu extends javax.swing.JFrame {
 
-    private DAOInterface dao;
+    private ProductDAOInterface dao;
 
     /**
      * Creates new form MainMenu
      */
-    public MainMenu(DAOInterface dao) {
+    public MainMenu(ProductDAOInterface dao) {
         initComponents();
         setTitle("Product Administration");
         this.dao = dao;

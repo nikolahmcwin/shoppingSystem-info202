@@ -1,7 +1,7 @@
 
-import dao.DAOInterface;
 import dao.ProductDatabase;
 import gui.MainMenu;
+import dao.ProductDAOInterface;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,7 +17,7 @@ public class Administration {
 
     public static void main(String[] args) {
 
-        DAOInterface dao = new ProductDatabase();
+        ProductDAOInterface dao = new ProductDatabase();
         MainMenu menu = new MainMenu(dao);
         menu.setLocationRelativeTo(null);
         menu.setVisible(true);

@@ -12,7 +12,7 @@ import java.util.Collection;
  *
  * @author peani371
  */
-public interface DAOInterface {
+public interface ProductDAOInterface {
 
     void deleteProduct(Product oldProd);
 

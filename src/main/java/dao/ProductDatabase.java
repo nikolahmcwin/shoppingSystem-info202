@@ -18,7 +18,7 @@ import java.util.HashSet;
  *
  * @author peani371
  */
-public class ProductDatabase implements DAOInterface {
+public class ProductDatabase implements ProductDAOInterface {
 
     private String dbURL = "jdbc:h2:tcp://localhost:9047/project;IFEXISTS=TRUE";
 

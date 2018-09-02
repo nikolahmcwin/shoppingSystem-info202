@@ -5,7 +5,6 @@
  */
 package gui;
 
-import dao.DAOInterface;
 import domain.Product;
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -21,6 +20,7 @@ import org.mockito.ArgumentCaptor;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import dao.ProductDAOInterface;
 
 /**
  *
@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
  */
 public class ProductEditorTest {
 
-    private DAOInterface dao;
+    private ProductDAOInterface dao;
     private DialogFixture fixture;
     private Robot robot;
 
@@ -45,7 +45,7 @@ public class ProductEditorTest {
         categories.add("NewCategory");
 
         // create a mock for the DAO
-        dao = mock(DAOInterface.class);
+        dao = mock(ProductDAOInterface.class);
 
         // stub the getMajors method to return the test majors
         when(dao.getCategories()).thenReturn(categories);

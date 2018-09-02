@@ -4,7 +4,7 @@ import domain.Customer;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class CustomerCollectionsDAO implements CustomerDAO {
+public final class CustomerCollectionsDAO implements CustomerDAOInterface {
 
     private static final Map<String, Customer> customers = new HashMap<>();
 
