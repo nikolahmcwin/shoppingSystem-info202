@@ -5,6 +5,8 @@
  */
 package web;
 
+import dao.DAOInterface;
+import dao.ProductDatabase;
 import java.util.concurrent.CompletableFuture;
 import org.jooby.Jooby;
 
@@ -14,9 +16,16 @@ import org.jooby.Jooby;
  */
 public class Server extends Jooby {
 
+    private DAOInterface dao = new ProductDatabase();
+
     public Server() {
         port(2147);
-        get("/", () -> "Hello World");
+        get("/api/products", () -> dao.getProducts());
+        
+        get("/api/products/:id", (req) -> {
+            String id = req.param("id").value();
+            return dao.searchForProduct(id);
+        });
     }
 
     public static void main(String[] args) throws Exception {
