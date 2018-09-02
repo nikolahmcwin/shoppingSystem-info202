@@ -16,8 +16,8 @@ public class Customer {
     private String firstName;
     private String surname;
     private String password;
+    private String address;
     private String emailAddress;
-    private String shippingDetails;
     private String creditCardDetails;
 
     public void setPersonID(String personID) {
@@ -39,13 +39,13 @@ public class Customer {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
-    }
-
-    public void setShippingDetails(String shippingDetails) {
-        this.shippingDetails = shippingDetails;
     }
 
     public void setCreditCardDetails(String creditCardDetails) {
@@ -72,12 +72,12 @@ public class Customer {
         return password;
     }
 
+    public String getAddress() {
+        return address;
+    }
+    
     public String getEmailAddress() {
         return emailAddress;
-    }
-
-    public String getShippingDetails() {
-        return shippingDetails;
     }
 
     public String getCreditCardDetails() {
