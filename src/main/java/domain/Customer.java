@@ -11,17 +11,17 @@ package domain;
  */
 public class Customer {
 
-    private Integer personID;
+    private Integer customerID;
     private String username;
     private String firstName;
     private String surname;
     private String password;
     private String address;
-    private String emailAddress;
-    private String creditCardDetails;
+    private String email;
+    private String creditCard;
 
     public void setPersonID(Integer personID) {
-        this.personID = personID;
+        this.customerID = personID;
     }
 
     public void setUsername(String username) {
@@ -45,15 +45,15 @@ public class Customer {
     }
 
     public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+        this.email = emailAddress;
     }
 
     public void setCreditCardDetails(String creditCardDetails) {
-        this.creditCardDetails = creditCardDetails;
+        this.creditCard = creditCardDetails;
     }
 
     public Integer getPersonID() {
-        return personID;
+        return customerID;
     }
 
     public String getUsername() {
@@ -77,11 +77,11 @@ public class Customer {
     }
     
     public String getEmailAddress() {
-        return emailAddress;
+        return email;
     }
 
     public String getCreditCardDetails() {
-        return creditCardDetails;
+        return creditCard;
     }
 
     @Override

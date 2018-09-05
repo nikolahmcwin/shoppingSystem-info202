@@ -21,6 +21,7 @@ public class Server extends Jooby {
 
     private ProductDAOInterface dao = new ProductDatabase();
     private CustomerDAOInterface custDao = new CustomerCollectionsDAO();
+    //private CustomerDAOInterface custDao = new CustomerDatabase();
 
     public Server() {
         port(2147);

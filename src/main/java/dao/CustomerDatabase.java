@@ -22,19 +22,18 @@ import java.util.HashSet;
 public class CustomerDatabase implements CustomerDAOInterface {
 
     private String dbURL = "jdbc:h2:tcp://localhost:9047/project;IFEXISTS=TRUE";
-
+    
     public CustomerDatabase(String newDbURL) {
         this.dbURL = newDbURL;
     }
 
     public CustomerDatabase() {
-
     }
 
     @Override
     public void save(Customer customer) {
-        String sql = "Insert into Customer (PersonID, Username, Password, "
-                + "Firstname, Surname, Address, EmailAddress, CreditCard) "
+        String sql = "Insert into Customer (CustomerID, Username, Password, "
+                + "Firstname, Surname, Address, Email, CreditCard) "
                 + "values (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (
@@ -79,7 +78,7 @@ public class CustomerDatabase implements CustomerDAOInterface {
                 String fname = rs.getString("Firstname");
                 String lname = rs.getString("Surname");
                 String address = rs.getString("Address");
-                String email = rs.getString("EmailAddress");
+                String email = rs.getString("Email");
                 String creditCard = rs.getString("CreditCard");
 
                 Customer c = new Customer();
@@ -106,7 +105,27 @@ public class CustomerDatabase implements CustomerDAOInterface {
 
     @Override
     public Boolean validateCredentials(String username, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        String sql = "select * from Customer where Username = ?, password = ?";
+
+        try (
+                Connection dbCon = JdbcConnection.getConnection(dbURL);
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+                
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs != null) {
+                return true;
+            } else {
+                return null;
+            }
+            
+        } catch (SQLException ex) {
+            throw new DAOException(ex.getMessage(), ex);
+        }
     }
 
 }
