@@ -36,3 +36,40 @@ INSERT INTO CUSTOMER (username, password, firstname, surname, address, email,
 creditcard) VALUES ('nik','guest','Nikolah','Pearce',
 '7A Grange Street, Dunedin Central','nikolahp13@gmail.com',
 '1234-5678-1234-1234 09/21 344');
+
+INSERT INTO CUSTOMER (username, password, firstname, surname, address, email, 
+creditcard) VALUES ('billy','guest','Billy','Weeks',
+'7A Grange Street, Dunedin Central','billy.weeks@gmail.com',
+'1234-5678-999-1234 09/XX 994');
+
+{"customerID":3,"username":"testDB","password":"dummy","firstName":"Test","surname":"McTested","address":"1 Test st, Dunedin.l","email":"test.test@gmail.com","creditCard":"1234-5678-999-1234 09/XX 994"}
+
+CREATE SEQUENCE SaleID_Seq
+    start with 400
+    increment by 2
+    maxvalue 8999;
+
+CREATE TABLE Sale (
+    SaleID bigint default SaleID_Seq.nextval,
+    SaleDate Date not null,
+    Status varchar(25),
+    Username varchar(25) not null,
+    constraint Sale_PK primary key (SaleID),
+    constraint customer_sale_FK foreign key references customer(username)
+);
+CREATE SEQUENCE SaleItemID_Seq
+    start with 9000
+    increment by 5
+    maxvalue 999999;
+
+CREATE TABLE SaleTtem (
+    Quantity integer not null,
+    Price decimal(7,2) not null,
+    ProductID varchar(20),
+    SaleID bigint not null,
+    constraint Saleitem_PK primary key (SaleID, ProductID),
+    constraint SaleID_FK foreign key references sale(saleid),
+    constraint ProductID_FK foreign key references product(pid)
+);
+
+
