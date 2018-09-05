@@ -28,7 +28,11 @@ CREATE TABLE Customer (
     Surname varchar(20) not null,
     Address varchar(100) not null,
     Email varchar(50) not null unique,
-    CreditCard varchar(40) not null
+    CreditCard varchar(40) not null,
     constraint Customer_PK primary key (username)
 );
 
+INSERT INTO CUSTOMER (username, password, firstname, surname, address, email, 
+creditcard) VALUES ('nik','guest','Nikolah','Pearce',
+'7A Grange Street, Dunedin Central','nikolahp13@gmail.com',
+'1234-5678-1234-1234 09/21 344');
