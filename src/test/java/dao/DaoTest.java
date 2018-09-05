@@ -55,7 +55,11 @@ public class DaoTest {
 
     @Test
     public void testDaoSave() {
-
+        
+        // ensure that retrieving before saving does not find anything
+        Product r = dao.searchForProduct("3");
+        assertNull("Product should not yet exist.", r);
+        
         // save the product using DAO
         dao.saveProduct(prodThree);
 
@@ -111,7 +115,7 @@ public class DaoTest {
         Product retrieved = dao.searchForProduct("1");
 
         // assert that you got back prodOne, and not another product
-        assertEquals("ProdOne should be equal", retrieved, prodOne);
+        assertEquals("Product found should be ProdOne", retrieved, prodOne);
 
         // assert that prodOne's details were properly retrieved
         assertEquals(prodOne.getProductID(), retrieved.getProductID());
@@ -130,16 +134,78 @@ public class DaoTest {
     
     @Test
     public void testDaoEditProduct() {
-        // Test you can save an existing product with edited details
+
+        // ensure that retrieving before saving has old values
+        Product retrieved = dao.searchForProduct("1");
+        assertEquals("name1", retrieved.getName());
+        assertEquals("cat1", retrieved.getCategory());
+        
+        // Change some values
+        prodOne.setName("NewName");
+        prodOne.setCategory("NewCategory");
+        
+        // Check the values were properly updated
+        assertEquals(prodOne.getName(), "NewName");
+        assertEquals(prodOne.getCategory(), "NewCategory");
+        
+        // save the updated product using DAO
+        dao.saveProduct(prodOne);
+
+        // retrieve the same product via DAO
+        retrieved = dao.searchForProduct("1");
+        assertEquals("Retrieved product should be the same",
+                prodOne, retrieved);
+        
+        // assert that prodOne's details were properly retrieved
+        assertEquals(prodOne.getProductID(), retrieved.getProductID());
+        assertEquals(prodOne.getName(), retrieved.getName());
+        assertEquals(prodOne.getDescription(), retrieved.getDescription());
+        assertEquals(prodOne.getCategory(), retrieved.getCategory());
+        assertEquals(prodOne.getPrice(), retrieved.getPrice());
+        assertEquals(prodOne.getQuantityInStock(), retrieved.getQuantityInStock());
+
     }
     
     @Test
     public void testDaoGetAllCategories() {
+        Collection<String> categories = dao.getCategories();
+
+        // ensure the result includes the two saved products
+        assertTrue("prodOne category should exist", categories.contains(prodOne.getCategory()));
+        assertTrue("prodTwo category should exist", categories.contains(prodTwo.getCategory()));
+
+        // ensure the result ONLY includes the two saved products
+        assertEquals("Only 2 categories in result", 2, categories.size());
         
+        // add a new category and check that now exists
+        dao.saveProduct(prodThree);
+        categories = dao.getCategories();
+        
+        // ensure the result now includes three categories
+        assertEquals("3 categories in result should exist", 3, categories.size());
+        assertTrue("prodThree category should exist", 
+                categories.contains(prodThree.getCategory()));
     }
     
     @Test
     public void testDaoGetProductByCategory() {
         
+        // Test an existing category returns all products in it
+        Collection<Product> results = 
+                dao.filterProductCategory(prodOne.getCategory());
+        assertEquals("1 product should exist in results", 1, results.size());
+        assertTrue("prodOne category should exist", results.contains(prodOne));
+        
+        // Add a new prod to existing category and test it is found
+        prodThree.setCategory("cat1");
+        dao.saveProduct(prodThree);
+        results = dao.filterProductCategory(prodOne.getCategory());
+        assertEquals("2 products should exist in results", 2, results.size());
+        assertTrue("prodOne category should exist", results.contains(prodOne));
+        assertTrue("prodOneopy category should exist", results.contains(prodThree));
+        
+        // test retrieving non existing category gives null
+        results = dao.filterProductCategory("nonexisting");
+        assertEquals("0 products should exist in results", 0, results.size());
     }
 }
