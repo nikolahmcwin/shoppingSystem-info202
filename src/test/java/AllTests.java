@@ -13,7 +13,8 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
     dao.DaoTest.class,
     gui.ProductEditorTest.class,
-    gui.ProductViewerTest.class})
+    //gui.ProductViewerTest.class
+})
 
 public class AllTests {
 

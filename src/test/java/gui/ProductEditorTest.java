@@ -47,7 +47,7 @@ public class ProductEditorTest {
         // create a mock for the DAO
         dao = mock(ProductDAOInterface.class);
 
-        // stub the getMajors method to return the test majors
+        // stub the geCategories method to return the test categories
         when(dao.getCategories()).thenReturn(categories);
 
     }
@@ -67,7 +67,7 @@ public class ProductEditorTest {
         fixture = new DialogFixture(robot, dialog);
         fixture.show().requireVisible();
 
-        // verify that the UI componenents contains the student's details
+        // verify that the UI componenents contains the product's details
         fixture.textBox("txtID").requireText("1");
         fixture.textBox("txtName").requireText("name1");
         fixture.textBox("txtDescription").requireText("desc1");
@@ -82,10 +82,12 @@ public class ProductEditorTest {
         // click the save button
         fixture.button("buttonSave").click();
 
-        // create a Mockito argument captor to use to retrieve the passed student from the mocked DAO
+        // create a Mockito argument captor to use to retrieve the passed 
+        // student from the mocked DAO
         ArgumentCaptor<Product> argument = ArgumentCaptor.forClass(Product.class);
 
-        // verify that the DAO.save method was called, and capture the passed student
+        // verify that the DAO.save method was called, and capture the
+        // passed student
         verify(dao).saveProduct(argument.capture());
 
         // retrieve the passed student from the captor
@@ -93,7 +95,8 @@ public class ProductEditorTest {
 
         // check that the changes were saved
         assertEquals("Ensure the name was changed", "Jim", editedProduct.getName());
-        assertEquals("Ensure the major was changed", "NewCategory", editedProduct.getCategory());
+        assertEquals("Ensure the major was changed", "NewCategory", 
+                editedProduct.getCategory());
     }
 
     @Test
