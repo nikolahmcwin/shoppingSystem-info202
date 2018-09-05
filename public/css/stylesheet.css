@@ -1,0 +1,21 @@
+/* 
+    Created on : 5/09/2018, 2:15:35 PM
+    Author     : peani371
+*/
+
+* {
+	margin: 0px;
+	padding: 0px;	
+}
+
+html {
+	background-color: #DADADA;
+	color: #000000;
+}
+
+body {
+	font-family: arial, sans-serif;
+	width: 75%;
+	margin-left: auto;
+	margin-right: auto;
+}
