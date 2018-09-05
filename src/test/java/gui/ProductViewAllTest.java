@@ -16,6 +16,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import dao.ProductDAOInterface;
+import gui.helpers.SimpleListModel;
 
 /**
  *
@@ -68,6 +69,12 @@ public class ProductViewAllTest {
         // use AssertJ to control the dialog
         fixture = new DialogFixture(robot, dialog);
         fixture.show().requireVisible();
+        
+        SimpleListModel model = (SimpleListModel) fixture.list("lstProducts").target().getModel();
+
+        // check the contents
+        assertTrue("list contains the expected product", model.contains(prodOne));
+        assertEquals("list contains the correct number of products", 2, model.getSize());
     }
 
 }
