@@ -18,32 +18,32 @@ and open the template in the editor.
     <body>
         <div>
             <h1>Create an Account</h1>
-            <form>
+            <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.registerCustomer(customer)">
                 <fieldset>
                     <legend>Account Details</legend>
                     <label>Username:</label>
-                    <input class="in" type="text" name="username">
+                    <input class="in" type="text" ng-model="customer.username" required>
                     <br>
                     <label>First Name:</label>
-                    <input class="in" type="text" name="firstname">
+                    <input class="in" type="text" ng-model="customer.firstName" required>
                     <br>
                     <label>Last Name:</label>
-                    <input class="in" type="text" name="surname">
+                    <input class="in" type="text"ng-model="customer.surname" required>
                     <br>
                     <label>Email:</label>
-                    <input class="in" type="email" name="email">
+                    <input class="in" type="email" ng-model="customer.email" required>
                     <br>
                     <label>Address:</label>
                     <br>
-                    <textarea class="in" name="address" rows="5" cols="50"></textarea>
+                    <textarea class="in" ng-model="customer.address" required rows="5" cols="50"></textarea>
                     <br>
                     <label>Credit Card details:</label>
-                    <input class="in" type="text" name="creditcard">
+                    <input class="in" type="text" ng-model="customer.creditCard" required>
                     <br>
                     <label>Password:</label>
-                    <input class="in" type="password" name="password">
+                    <input class="in" type="password" ng-model="customer.password" required>
                     <br><br>
-                    <input type="submit" value="Create Account">
+                    <button type="submit">Create Account</button>
                 </fieldset>
             </form>
         </div>
