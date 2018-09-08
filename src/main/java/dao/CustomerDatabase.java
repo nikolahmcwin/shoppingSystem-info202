@@ -32,22 +32,21 @@ public class CustomerDatabase implements CustomerDAOInterface {
 
     @Override
     public void save(Customer customer) {
-        String sql = "Insert into Customer (CustomerID, Username, Password, "
+        String sql = "Insert into Customer (Username, Password, "
                 + "Firstname, Surname, Address, Email, CreditCard) "
-                + "values (?, ?, ?, ?, ?, ?, ?, ?)";
+                + "values (?, ?, ?, ?, ?, ?, ?)";
 
         try (
                 Connection dbCon = JdbcConnection.getConnection(dbURL);
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
 
-            stmt.setInt(1, customer.getPersonID());
-            stmt.setString(2, customer.getUsername());
-            stmt.setString(3, customer.getPassword());
-            stmt.setString(4, customer.getFirstName());
-            stmt.setString(5, customer.getSurname());
-            stmt.setString(6, customer.getAddress());
-            stmt.setString(7, customer.getEmailAddress());
-            stmt.setString(8, customer.getCreditCardDetails());
+            stmt.setString(1, customer.getUsername());
+            stmt.setString(2, customer.getPassword());
+            stmt.setString(3, customer.getFirstName());
+            stmt.setString(4, customer.getSurname());
+            stmt.setString(5, customer.getAddress());
+            stmt.setString(6, customer.getEmailAddress());
+            stmt.setString(7, customer.getCreditCardDetails());
 
             stmt.executeUpdate();
 

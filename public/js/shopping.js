@@ -42,16 +42,18 @@ module.controller('ProductController', function (productDAO, categoryDAO) {
 // Customer controller
 module.controller('CustomerController', function (registerDAO, signInDAO, $sessionStorage, $window) {
 
-    //this.customers = registerDAO.query();
-
+    this.signInMessage = "Please sign in to continue.";
+    let ctrl = this; 
+    
     this.registerCustomer = function (customer) {
         registerDAO.save(null, customer);
         console.log(customer);
+        //ctrl.signInMessage = "Account created successfully. Please sign in to continue.";
+        $window.location.href = '/signin.html';
     };
 
-    this.signInMessage = "Please sign in to continue.";
 
-    let ctrl = this;    
+       
     this.signIn = function (username, password) {
         
         signInDAO.get({'username': username},

@@ -18,18 +18,21 @@ CREATE TABLE Product (
     constraint Product_PK primary key (PID)
 );
 
+/*
 CREATE SEQUENCE Customer_ID_Seq;
+CustomerID bigint default Customer_ID_Seq.nextval,
+*/
 
 CREATE TABLE Customer (
-    CustomerID bigint default Customer_ID_Seq.nextval,
-    Username varchar(25),
+    CustomerID bigint auto_increment(1300),
+    Username varchar(25) not null unique,
     Password varchar(25) not null,
     Firstname varchar(20) not null,
     Surname varchar(20) not null,
     Address varchar(100) not null,
     Email varchar(50) not null unique,
     CreditCard varchar(40) not null,
-    constraint Customer_PK primary key (username)
+    constraint Customer_PK primary key (CustomerID)
 );
 
 INSERT INTO CUSTOMER (username, password, firstname, surname, address, email, 
@@ -53,10 +56,11 @@ CREATE TABLE Sale (
     SaleID bigint default SaleID_Seq.nextval,
     SaleDate Date not null,
     Status varchar(25),
-    Username varchar(25) not null,
+    CustomerID bigint not null,
     constraint Sale_PK primary key (SaleID),
-    constraint customer_sale_FK foreign key references customer(username)
+    constraint customer_sale_FK foreign key references customer(CustomerID)
 );
+
 CREATE SEQUENCE SaleItemID_Seq
     start with 9000
     increment by 5
