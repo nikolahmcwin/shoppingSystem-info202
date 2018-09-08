@@ -15,20 +15,20 @@ and open the template in the editor.
         <script src="js/ngStorage.min.js"></script>
         <script src="js/shopping.js"></script>
     </head>
-    <body>
+    <body  ng-controller="CustomerController as custCtrl">
         <div>
             <h1>Sign in</h1>
-            <p>Please sign in to continue</p>
-            <form>
+            <p>{{custCtrl.signInMessage}}</p>
+            <form ng-submit="custCtrl.signIn(username, password)">
                 <fieldset>
                     <legend>Account Details</legend>
                     <label>Username:</label>
-                    <input class="in" type="text" name="username">
+                    <input class="in" type="text" ng-model="username" required>
                     <br>
                     <label>Password:</label>
-                    <input class="in" type="password" name="password">
+                    <input class="in" type="password" ng-model="password" required>
                     <br><br>
-                    <input type="submit" value="Sign In">
+                    <button type="submit">Sign In</button>
                 </fieldset>
             </form>
             <p>If you don't have an account then you can <a href="register.html">create one.</a></p>

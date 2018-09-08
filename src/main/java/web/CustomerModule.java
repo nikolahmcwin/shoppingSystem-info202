@@ -9,6 +9,7 @@ import org.jooby.Jooby;
 import domain.Customer;
 import org.jooby.Status;
 import dao.CustomerDAOInterface;
+import org.jooby.Err;
 
 /**
  *
@@ -20,6 +21,9 @@ public class CustomerModule extends Jooby {
         get("/api/customers/:username", (req) -> {
             String username = req.param("username").value();
             Customer c = custDao.getCustomer(username);
+            if (c == null) {
+                throw new Err(Status.NOT_FOUND);
+            }
             c.setPassword(null);
             return c;
         });

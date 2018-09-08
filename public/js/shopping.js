@@ -15,6 +15,10 @@ module.factory('registerDAO', function ($resource) {
     return $resource('/api/register');
 });
 
+module.factory('signInDAO', function ($resource) {
+    return $resource('/api/customers/:username');
+});
+
 // Product controller
 module.controller('ProductController', function (productDAO, categoryDAO) {
 
@@ -36,13 +40,33 @@ module.controller('ProductController', function (productDAO, categoryDAO) {
 });
 
 // Customer controller
-module.controller('CustomerController', function (registerDAO) {
-    this.customers = registerDAO.query();
+module.controller('CustomerController', function (registerDAO, signInDAO, $sessionStorage, $window) {
+
+    //this.customers = registerDAO.query();
+
     this.registerCustomer = function (customer) {
         registerDAO.save(null, customer);
         console.log(customer);
     };
 
+    this.signInMessage = "Please sign in to continue.";
+
+    let ctrl = this;    
+    this.signIn = function (username, password) {
+        
+        signInDAO.get({'username': username},
+        
+            // success
+            function (customer) {
+                $sessionStorage.customer = customer;
+                $window.location.href = '.';
+            },
+            // fail
+            function () {
+                ctrl.signInMessage = 'Sign in failed. Please try again.';
+            }
+        );
+    };
 });
 
 
