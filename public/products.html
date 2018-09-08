@@ -16,6 +16,7 @@ and open the template in the editor.
         <script src="js/shopping.js"></script>
     </head>
     <body ng-controller="ProductController as prodCtrl">
+        <div ng-include="'menu.html'" ></div>
         <div>
             <h1>Products</h1>
             <button type="button"  ng-click="prodCtrl.displayAll()">All</button>

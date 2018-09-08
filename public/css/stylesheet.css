@@ -17,13 +17,18 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 }
+#menu a{
+    padding: 20px;
+    background-color: white;
+    text-align: center;
+}
+#welcome {
+    float: right;
+}
 h1 {
     background-color: grey;
     padding: 20px;
     text-align: center;
-}
-.img {
-
 }
 label {
     text-align: right;

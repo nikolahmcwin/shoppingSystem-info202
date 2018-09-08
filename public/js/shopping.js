@@ -43,6 +43,8 @@ module.controller('ProductController', function (productDAO, categoryDAO) {
 module.controller('CustomerController', function (registerDAO, signInDAO, $sessionStorage, $window) {
 
     this.signInMessage = "Please sign in to continue.";
+    this.signedIn = false;
+    this.welcome = "";
     let ctrl = this; 
     
     this.registerCustomer = function (customer) {
@@ -51,13 +53,9 @@ module.controller('CustomerController', function (registerDAO, signInDAO, $sessi
         //ctrl.signInMessage = "Account created successfully. Please sign in to continue.";
         $window.location.href = '/signin.html';
     };
-
-
        
     this.signIn = function (username, password) {
-        
         signInDAO.get({'username': username},
-        
             // success
             function (customer) {
                 $sessionStorage.customer = customer;
@@ -69,6 +67,21 @@ module.controller('CustomerController', function (registerDAO, signInDAO, $sessi
             }
         );
     };
+    
+    this.checkSignIn = function() {
+        if ($sessionStorage.customer !== null) {
+            ctrl.welcome += "Welcome, ";
+            ctrl.welcome += $sessionStorage.customer.firstName;
+            ctrl.welcome += "!";
+            ctrl.signedIn = true;
+        }
+    };
+    
+    this.signOut = function() {
+        $sessionStorage.customer = null;
+        $window.location.href = '.';
+    };
+    
 });
 
 
