@@ -69,7 +69,7 @@ module.controller('CustomerController', function (registerDAO, signInDAO, $sessi
     };
     
     this.checkSignIn = function() {
-        if ($sessionStorage.customer !== null) {
+        if ($sessionStorage.customer) {
             ctrl.welcome += "Welcome, ";
             ctrl.welcome += $sessionStorage.customer.firstName;
             ctrl.welcome += "!";
@@ -78,7 +78,8 @@ module.controller('CustomerController', function (registerDAO, signInDAO, $sessi
     };
     
     this.signOut = function() {
-        $sessionStorage.customer = null;
+        delete $sessionStorage.customer;
+        $sessionStorage.$reset();
         $window.location.href = '.';
     };
     
