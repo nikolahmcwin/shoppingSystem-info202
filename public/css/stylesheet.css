@@ -25,3 +25,16 @@ h1 {
 .img {
 
 }
+label {
+    text-align: right;
+}
+.in {
+    width: 95%;
+}
+a {
+    padding: 0px;
+    margin: 0px;
+}
+button {
+    width: 150px;
+}

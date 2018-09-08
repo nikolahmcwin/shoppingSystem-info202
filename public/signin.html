@@ -15,8 +15,19 @@ and open the template in the editor.
         <div>
             <h1>Sign in</h1>
             <p>Please sign in to continue</p>
-            <h2>Account Details:</h2>
-            <p>If you don't have an account then you can create one</p>
+            <form>
+                <fieldset>
+                    <legend>Account Details</legend>
+                    <label>Username:</label>
+                    <input class="in" type="text" name="username">
+                    <br>
+                    <label>Password:</label>
+                    <input class="in" type="password" name="password">
+                    <br><br>
+                    <input type="submit" value="Sign In">
+                </fieldset>
+            </form>
+            <p>If you don't have an account then you can <a href="register.html">create one.</a></p>
         </div>
     </body>
 </html>

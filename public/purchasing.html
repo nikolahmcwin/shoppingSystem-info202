@@ -13,8 +13,36 @@ and open the template in the editor.
     </head>
     <body>
         <div>
-            <h1>Products </h1>
-            <h2>Quantity to buy</h2>
+            <h1>Quantity to purchase</h1>
+            <p>How many of this product your you like to purchase?</p>
+            <table>
+                <tr> 
+                    <td>Product ID:</td>
+                    <td>111234</td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td>Desc</td> 
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td>$50.00</td>
+                </tr>
+                <tr>
+                    <td>Quantity Available</td>
+                    <td>10</td>
+                </tr>
+            </table>
+            
+            <form>
+                <fieldset>
+                    <legend>Quantity to buy</legend>
+                    <label>Quantity:</label>
+                    <input class="in" type="number" name="quantity">
+                    <br><br>
+                    <input type="submit" value="Add to Cart">
+                </fieldset>
+            </form>
         </div>
     </body>
 </html>
