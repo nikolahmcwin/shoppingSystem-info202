@@ -15,12 +15,11 @@ and open the template in the editor.
         <script src="js/ngStorage.min.js"></script>
         <script src="js/shopping.js"></script>
     </head>
-    <body>
+    <body ng-controller="ProductController as prodCtrl">
         <div>
             <h1>Products</h1>
-            <button type="button">All</button>
-            <button type="button">Category1</button>
-            <button type="button">Category2</button>
+            <button type="button"  ng-click="prodCtrl.displayAll()">All</button>
+            <button type="button" ng-repeat="cat in prodCtrl.categories" ng-click="prodCtrl.selectCategory(cat)">{{cat}}</button>
             <table>
                 <tr>
                     <th>Name</th>
@@ -28,11 +27,11 @@ and open the template in the editor.
                     <th>Price</th>
                     <th>Available</th>
                 </tr>
-                <tr>
-                    <td>Teddy</td>
-                    <td>Desc</td> 
-                    <td>$50.00</td>
-                    <td>10</td>
+                <tr ng-repeat="product in prodCtrl.products">
+                    <td>{{product.name}}</td>
+                    <td>{{product.description}}</td> 
+                    <td>{{product.price}}</td>
+                    <td>{{product.quantityInStock}}</td>
                 </tr>
             </table>
         </div>
