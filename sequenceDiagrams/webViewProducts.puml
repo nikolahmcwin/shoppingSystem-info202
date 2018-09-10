@@ -8,17 +8,79 @@ skinparam style strictuml
 actor "Customer" as user
 
 ' create participants
-participant "Products Webpage" as webpage
-participant "Jooby Module" as jooby
-participant "AngularJS Controller" as controller 
-participant "Product Database" as dao <<DAO>>
+participant "Products Webpage" as web <<HTML>>
+
+participant "Product Controller" as controller <<AngularJS>>
+participant "Product Module" as jooby <<Jooby>>
+participant  "Product Database" as dao <<DAO>>
+
+'participant "AngularJS Cust Controller" as cust
+'participant "AngularJS Product Controller" as controller 
+'participant "Product Database" as dao
+
+'create "Product Database" as dao <<DAO>>
+'jooby -> dao : construct
+
+'jooby-> jooby : use(new Gzon())
+'jooby-> jooby : use(new ProductModule(dao))
+'jooby-> jooby : use(new CustomerModule(custDao))
+'jooby-> jooby : use(new AssetModule())
+
+user -> web++ : Navigates to website
+web-> web : ng-include(menu.html)
+'user -> web : Clicks 'Sign in' on nav bar
+
+'web-> web : Redirects to 'signin.html'
+'web-> cust++ : construct new CustomerController as custCtrl
+'create "Customer Controller" as cust <<AngularJS>>
+'web -> cust++ : construct new CustomerController as custCtrl
+'cust -> web : signInMessage = "Please sign in to continue"
+
+'user -> web : Enters username and password
+'user -> web : Clicks 'Sign in'
+
+'web -> cust : custCtrl.signIn(username, password)
+'cust -> cust : $sessionStorage.customer = customer
+'cust --> web : redirects to 'index.html'
+'cust--
+
+'user -> web : Clicks 'Browse Products' in the nav bar
+'web-> web : Redirects to 'products.html'
+'web -> controller++ : construct new ProductController as prodCtrl
+'create "Product Controller" as controller <<AngularJS>>
+
+web -> controller++ : construct new ProductController as prodCtrl
+
+controller -> controller : productDAO.query()
+controller -> controller : return $resource('/api/products/:id');
+controller -> jooby++ : GET products request
+jooby -> dao++ : dao.getProducts()
+dao --> jooby : allProducts
+dao--
+jooby --> controller : products as JSON
+jooby--
+controller -> web : products
+web -> web : render(products) via ng-repeat
 
 
-' create main menu frame
-'create "MainMenu" as menu <<frame>>
-'main -> menu : construct
+controller -> controller  : categoriesDAO.query()
+controller -> controller : return $resource('/api/categories/:cat');
+controller -> jooby++ : GET categories request
+jooby -> jooby : GET categories request
+jooby -> dao++ : dao.getCategories()
+dao --> jooby : allCategories
+dao--
+jooby --> controller : categories as JSON
+jooby--
 
-' sign in
-' clicj view products
-' 
+
+
+' ng-repeat="product in prodCtrl.products"
+controller -> web : categories
+web -> web : render(categories)  via ng-repeat
+web --> user : awaiting further action
+web--
+
+
+
 @enduml
