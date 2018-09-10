@@ -78,7 +78,8 @@ module.controller('CustomerController', function (registerDAO, signInDAO, $sessi
     };
     
     this.signOut = function() {
-        delete $sessionStorage.customer;
+        ctrl.signedIn = false;
+        //delete $sessionStorage.customer;
         $sessionStorage.$reset();
         $window.location.href = '.';
     };
