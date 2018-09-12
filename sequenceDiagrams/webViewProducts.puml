@@ -52,26 +52,31 @@ web-> web : ng-include(menu.html)
 web -> controller++ : construct new ProductController as prodCtrl
 
 controller -> controller : productDAO.query()
-controller -> controller : return $resource('/api/products/:id');
-controller -> jooby++ : GET products request
+'controller -> controller : return $resource('/api/products/:id');
+controller -> jooby++ : HTTP GET '/api/products/'
 jooby -> dao++ : dao.getProducts()
 dao --> jooby : allProducts
+jooby -> jooby : constructs JSON of products
 dao--
-jooby --> controller : products as JSON
+jooby --> controller : JSON data
 jooby--
+controller -> controller : constructs products from JSON
+
 controller -> web : products
 web -> web : render(products) via ng-repeat
 
 
 controller -> controller  : categoriesDAO.query()
-controller -> controller : return $resource('/api/categories/:cat');
-controller -> jooby++ : GET categories request
-jooby -> jooby : GET categories request
+'controller -> controller : return $resource('/api/categories/:cat');
+controller -> jooby++ :  HTTP GET '/api/categories/'
 jooby -> dao++ : dao.getCategories()
 dao --> jooby : allCategories
 dao--
-jooby --> controller : categories as JSON
+jooby -> jooby : constructs JSON of categories
+dao--
+jooby --> controller : JSON data
 jooby--
+controller -> controller : constructs categories from JSON
 
 
 
