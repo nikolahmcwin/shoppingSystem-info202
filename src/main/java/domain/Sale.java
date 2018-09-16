@@ -12,12 +12,10 @@ import java.util.Date;
 public class Sale {
 
     private String saleID;
-    // Is this the correct format to use for Dates?
     private Date date;
-    // Would status be better off as a boolean?
     private String status;
     private Customer customer;
-    private Collection<SaleItem> saleItems = new ArrayList<>();
+    private Collection<SaleItem> items = new ArrayList<>();
 
     public String getSaleID() {
         return saleID;
@@ -36,7 +34,7 @@ public class Sale {
     }
 
     public Collection<SaleItem> getSaleItems() {
-        return saleItems;
+        return items;
     }
 
     public void setSaleID(String saleID) {
@@ -56,7 +54,7 @@ public class Sale {
     }
 
     public void setSaleItems(Collection<SaleItem> saleItems) {
-        this.saleItems = saleItems;
+        this.items = saleItems;
     }
 
     @Override
@@ -69,7 +67,7 @@ public class Sale {
         BigDecimal total = BigDecimal.ZERO;
         
         // Loop through each saleItem, and pull out the price, adding to total
-        for (SaleItem item : saleItems) {
+        for (SaleItem item : items) {
             total.add(item.getItemTotal());
         }
         
@@ -77,7 +75,7 @@ public class Sale {
     }
 
     public void addItem(SaleItem item) {
-        saleItems.add(item);
+        items.add(item);
     }
 
 }

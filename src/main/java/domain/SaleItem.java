@@ -10,7 +10,7 @@ public class SaleItem {
 
     private Integer quantityPurchased;
     private BigDecimal salePrice;
-    private Product saleProduct;
+    private Product product;
     private Sale sale;
 
     public Integer getQuantityPurchased() {
@@ -22,7 +22,7 @@ public class SaleItem {
     }
 
     public Product getSaleProduct() {
-        return saleProduct;
+        return product;
     }
 
     public Sale getSale() {
@@ -38,7 +38,7 @@ public class SaleItem {
     }
 
     public void setSaleProduct(Product saleProduct) {
-        this.saleProduct = saleProduct;
+        this.product = saleProduct;
     }
 
     public void setSaleID(Sale sale) {

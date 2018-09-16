@@ -1,5 +1,58 @@
 "use strict";
 
+// Sale Item class
+class SaleItem {
+
+    constructor(product, quantity) {
+        // only set the fields if we have a valid product
+        if (product) {
+            this.product = product;
+            this.quantityPurchased = quantity;
+            this.salePrice = product.price;
+        }
+    }
+
+    getItemTotal() {
+        return this.salePrice * this.quantityPurchased;
+    }
+
+}
+
+// Shopping cart class
+class ShoppingCart {
+
+    constructor() {
+        this.items = new Array();
+    }
+
+    reconstruct(sessionData) {
+        for (let item of sessionData.items) {
+            this.addItem(Object.assign(new SaleItem(), item));
+        }
+    }
+
+    getItems() {
+        return this.items;
+    }
+
+    addItem(item) {
+        this.items.push(item);
+    }
+
+    setCustomer(customer) {
+        this.customer = customer;
+    }
+
+    getTotal() {
+        let total = 0;
+        for (let item of this.items) {
+            total += item.getItemTotal();
+        }
+        return total;
+    }
+
+}
+
 var module = angular.module('ShoppingApp', ['ngResource', 'ngStorage']);
 
 // factories
@@ -17,6 +70,19 @@ module.factory('registerDAO', function ($resource) {
 
 module.factory('signInDAO', function ($resource) {
     return $resource('/api/customers/:username');
+});
+
+module.factory('cart', function ($sessionStorage) {
+    let cart = new ShoppingCart();
+
+    // is the cart in the session storage?
+    if ($sessionStorage.cart) {
+
+        // reconstruct the cart from the session data
+        cart.reconstruct($sessionStorage.cart);
+    }
+
+    return cart;
 });
 
 // Product controller
@@ -88,3 +154,9 @@ module.controller('CustomerController', function (registerDAO, signInDAO, $sessi
 
 
 // Shopping cart controller
+module.controller('CartController', function (cart) {
+
+    this.items = cart.getItems();
+    this.total = cart.getTotal();
+    
+});
