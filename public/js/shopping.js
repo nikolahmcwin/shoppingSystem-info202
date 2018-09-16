@@ -72,6 +72,10 @@ module.factory('signInDAO', function ($resource) {
     return $resource('/api/customers/:username');
 });
 
+module.factory('cartDAO', function ($resource) {
+    return $resource('/api/sales');
+});
+
 module.factory('cart', function ($sessionStorage) {
     let cart = new ShoppingCart();
 
@@ -154,14 +158,37 @@ module.controller('CustomerController', function (registerDAO, signInDAO, $sessi
 
 
 // Shopping cart controller
-module.controller('CartController', function (cart, $sessionStorage, $window) {
+module.controller('CartController', function (cart, cartDAO, $sessionStorage, $window) {
 
     this.items = cart.getItems();
     this.total = cart.getTotal();
     this.selectedProduct = $sessionStorage.selectedProduct;
     
     this.buy = function(product) {
-        $sessionStorage.product =  product;
+        //alert("in buy product");
+        $sessionStorage.selectedProduct =  product;
         $window.location.href = '/purchasing.html';
+    };
+    
+    this.addToCart = function(quantity) {
+        alert("in Add To Cart function. ");
+        
+        let prod = $sessionStorage.selectedProduct;
+        let newItem = new SaleItem(prod, quantity);
+        cart.addItem(newItem);
+        
+        $sessionStorage.cart = cart;
+        $window.location.href = '/products.html';
+    };
+    
+    this.checkOutCart = function() {
+        alert("in check out cart part");
+        let cust = $sessionStorage.customer;
+        cart.setCustomer(cust);
+        cartDAO.save();
+        
+        delete $sessionStorage.cart;
+        $window.location.href = '/confirmation.html';
+
     };
 });

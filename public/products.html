@@ -19,9 +19,9 @@ and open the template in the editor.
         <div ng-include="'menu.html'" ></div>
         <div>
             <h1>Products</h1>
-            <button class="butt" type="button"  ng-click="prodCtrl.displayAll()">All</button>
-            <button class="butt" type="button" ng-repeat="cat in prodCtrl.categories" ng-click="prodCtrl.selectCategory(cat)">{{cat}}</button>
-            <table>
+            <button class="standardButton" type="button"  ng-click="prodCtrl.displayAll()">All</button>
+            <button class="standardButton" type="button" ng-repeat="cat in prodCtrl.categories" ng-click="prodCtrl.selectCategory(cat)">{{cat}}</button>
+            <table  ng-controller="CartController as cartCtrl">
                 <tr>
                     <th>Name</th>
                     <th>Description</th> 
@@ -34,12 +34,7 @@ and open the template in the editor.
                     <td>{{product.description}}</td> 
                     <td>{{product.price}}</td>
                     <td>{{product.quantityInStock}}</td>
-                </tr>
-                <tr>
-                    <td><button>Buy</button></td>
-                    <td></td> 
-                    <td></td>
-                    <td></td>
+                    <td><button class="prodButton" ng-click="cartCtrl.buy(product)">Buy</button></td>
                 </tr>
             </table>
         </div>

@@ -69,6 +69,19 @@ body a {
     padding: 0px;
     margin: 0px;
 }
-button {
+table {
+    text-align: left;
+}
+.standardButton {
     width: 150px;
+    text-align: center;
+}
+.prodButton {
+    width: 50px;
+    padding: 0px;
+    margin: 0px;
+    
+}
+#checkOutButton {
+    text-align: center;
 }

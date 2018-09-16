@@ -18,8 +18,7 @@ and open the template in the editor.
     <body>
         <div ng-include="'menu.html'" ></div>
         <div ng-controller="CartController as cartCtrl">
-            <h1>Quantity to purchase</h1>
-            <p>How many of this product your you like to purchase?</p>
+            <h1>Shopping Cart</h1>
             <table>
                 <tr>
                     <th>Product</th>
@@ -27,14 +26,14 @@ and open the template in the editor.
                     <th>Quantity</th>
                     <th>Total</th>
                 </tr>
-                <tr ng-repeat="product in cart.items">
+                <tr ng-repeat="product in cartCtrl.items">
                     <td>{{product.name}}</td>
                     <td>{{product.price}}</td>
                     <td>{{product.quantityInStock}}</td>
-                    <td>{{}}</td> 
+                    <td>{{product.getItemTotal()}}</td> 
                 </tr>
             </table>
-           <button type="submit">Check Out Cart</button>
+           <button class="standardButton" type="submit" ng-click="cartCtrl.checkOutCart()">Check Out Cart</button>
         </div>
     </body>
 </html>

@@ -17,35 +17,38 @@ and open the template in the editor.
     </head>
     <body>
         <div ng-include="'menu.html'" ></div>
-        <div>
+        <div ng-controller="CartController as cartCtrl">
             <h1>Quantity to purchase</h1>
             <p>How many of this product your you like to purchase?</p>
             <table>
                 <tr> 
                     <td>Product ID:</td>
-                    <td>111234</td>
+                    <td>{{cartCtrl.selectedProduct.productID}}</td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>{{cartCtrl.selectedProduct.name}}</td>
                 </tr>
                 <tr>
                     <td>Description</td>
-                    <td>Desc</td> 
+                    <td>{{cartCtrl.selectedProduct.description}}</td> 
                 </tr>
                 <tr>
                     <td>Price</td>
-                    <td>$50.00</td>
+                    <td>{{cartCtrl.selectedProduct.price}}</td>
                 </tr>
                 <tr>
                     <td>Quantity Available</td>
-                    <td>10</td>
+                    <td>{{cartCtrl.selectedProduct.quantityInStock}}</td>
                 </tr>
-            </table>
-            
-            <form>
+            </table>         
+            <form  ng-submit="cartCtrl.addToCart(quantity)">
                 <fieldset>
                     <legend>Quantity to buy</legend>
                     <label>Quantity:</label>
-                    <input class="in" type="number" name="quantity">
-                    <br><br>
-                    <input type="submit" value="Add to Cart">
+                    <input class="in" type="number" name="quantity" ng-model="quantity">
+                    <br>
+                    <button class="in" type="submit" >Add to Cart</button>
                 </fieldset>
             </form>
         </div>
