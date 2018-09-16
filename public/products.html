@@ -19,20 +19,27 @@ and open the template in the editor.
         <div ng-include="'menu.html'" ></div>
         <div>
             <h1>Products</h1>
-            <button type="button"  ng-click="prodCtrl.displayAll()">All</button>
-            <button type="button" ng-repeat="cat in prodCtrl.categories" ng-click="prodCtrl.selectCategory(cat)">{{cat}}</button>
+            <button class="butt" type="button"  ng-click="prodCtrl.displayAll()">All</button>
+            <button class="butt" type="button" ng-repeat="cat in prodCtrl.categories" ng-click="prodCtrl.selectCategory(cat)">{{cat}}</button>
             <table>
                 <tr>
                     <th>Name</th>
                     <th>Description</th> 
                     <th>Price</th>
                     <th>Available</th>
+                    <th></th>
                 </tr>
                 <tr ng-repeat="product in prodCtrl.products">
                     <td>{{product.name}}</td>
                     <td>{{product.description}}</td> 
                     <td>{{product.price}}</td>
                     <td>{{product.quantityInStock}}</td>
+                </tr>
+                <tr>
+                    <td><button>Buy</button></td>
+                    <td></td> 
+                    <td></td>
+                    <td></td>
                 </tr>
             </table>
         </div>
