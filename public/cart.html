@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="ShoppingApp">
+    <head>
+        <title>Shopping Cart - Doohickies Shop</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/stylesheet.css" type="text/css"/>
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-resource.min.js"></script>
+        <script src="js/ngStorage.min.js"></script>
+        <script src="js/shopping.js"></script>
+    </head>
+    <body>
+        <div ng-include="'menu.html'" ></div>
+        <div ng-controller="CartController as cartCtrl">
+            <h1>Quantity to purchase</h1>
+            <p>How many of this product your you like to purchase?</p>
+            <table>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th> 
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+                <tr ng-repeat="product in cart.items">
+                    <td>{{product.name}}</td>
+                    <td>{{product.price}}</td>
+                    <td>{{product.quantityInStock}}</td>
+                    <td>{{}}</td> 
+                </tr>
+            </table>
+           <button type="submit">Check Out Cart</button>
+        </div>
+    </body>
+</html>

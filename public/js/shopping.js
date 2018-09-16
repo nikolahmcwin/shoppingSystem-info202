@@ -154,9 +154,14 @@ module.controller('CustomerController', function (registerDAO, signInDAO, $sessi
 
 
 // Shopping cart controller
-module.controller('CartController', function (cart) {
+module.controller('CartController', function (cart, $sessionStorage, $window) {
 
     this.items = cart.getItems();
     this.total = cart.getTotal();
+    this.selectedProduct = $sessionStorage.selectedProduct;
     
+    this.buy = function(product) {
+        $sessionStorage.product =  product;
+        $window.location.href = '/purchasing.html';
+    };
 });
