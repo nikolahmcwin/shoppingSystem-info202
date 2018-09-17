@@ -175,8 +175,9 @@ module.controller('CartController', function (cart, cartDAO, $sessionStorage, $w
         
         let prod = $sessionStorage.selectedProduct;
         let newItem = new SaleItem(prod, quantity);
-        cart.addItem(newItem);
+        //$sessionStorage.item =  newItem;
         
+        cart.addItem(newItem);
         $sessionStorage.cart = cart;
         $window.location.href = '/products.html';
     };

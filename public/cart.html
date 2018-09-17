@@ -26,11 +26,17 @@ and open the template in the editor.
                     <th>Quantity</th>
                     <th>Total</th>
                 </tr>
-                <tr ng-repeat="product in cartCtrl.items">
-                    <td>{{product.name}}</td>
-                    <td>{{product.price}}</td>
-                    <td>{{product.quantityInStock}}</td>
-                    <td>{{product.getItemTotal()}}</td> 
+                <tr ng-repeat="item in cartCtrl.items">
+                    <td>{{item.product.name}}</td>
+                    <td>${{item.product.price.toFixed(2)}}</td>
+                    <td>{{item.product.quantityInStock}}</td>
+                    <td>${{item.getItemTotal().toFixed(2)}}</td> 
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th>Total Cost</th>
+                    <td>${{cartCtrl.total.toFixed(2)}}</td>
                 </tr>
             </table>
            <button class="standardButton" type="submit" ng-click="cartCtrl.checkOutCart()">Check Out Cart</button>
