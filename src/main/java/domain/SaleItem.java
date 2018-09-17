@@ -21,7 +21,7 @@ public class SaleItem {
         return salePrice;
     }
 
-    public Product getSaleProduct() {
+    public Product getProduct() {
         return product;
     }
 
@@ -37,7 +37,7 @@ public class SaleItem {
         this.salePrice = salePrice;
     }
 
-    public void setSaleProduct(Product saleProduct) {
+    public void setProduct(Product saleProduct) {
         this.product = saleProduct;
     }
 

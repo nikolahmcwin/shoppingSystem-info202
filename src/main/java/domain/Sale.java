@@ -33,7 +33,7 @@ public class Sale {
         return customer;
     }
 
-    public Collection<SaleItem> getSaleItems() {
+    public Collection<SaleItem> getItems() {
         return items;
     }
 
@@ -53,7 +53,7 @@ public class Sale {
         this.customer = customer;
     }
 
-    public void setSaleItems(Collection<SaleItem> saleItems) {
+    public void setItems(Collection<SaleItem> saleItems) {
         this.items = saleItems;
     }
 

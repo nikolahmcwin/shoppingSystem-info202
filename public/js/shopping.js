@@ -171,7 +171,7 @@ module.controller('CartController', function (cart, cartDAO, $sessionStorage, $w
     };
     
     this.addToCart = function(quantity) {
-        alert("in Add To Cart function. ");
+        //alert("in Add To Cart function. ");
         
         let prod = $sessionStorage.selectedProduct;
         let newItem = new SaleItem(prod, quantity);
@@ -183,7 +183,7 @@ module.controller('CartController', function (cart, cartDAO, $sessionStorage, $w
     };
     
     this.checkOutCart = function() {
-        alert("in check out cart part");
+        //alert("in check out cart part");
         let cust = $sessionStorage.customer;
         cart.setCustomer(cust);
         cartDAO.save();

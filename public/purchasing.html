@@ -22,23 +22,23 @@ and open the template in the editor.
             <p>How many of this product your you like to purchase?</p>
             <table>
                 <tr> 
-                    <td>Product ID:</td>
+                    <th>Product ID:</th>
                     <td>{{cartCtrl.selectedProduct.productID}}</td>
                 </tr>
                 <tr>
-                    <td>Name</td>
+                    <th>Name:</th>
                     <td>{{cartCtrl.selectedProduct.name}}</td>
                 </tr>
                 <tr>
-                    <td>Description</td>
+                    <th>Description:</th>
                     <td>{{cartCtrl.selectedProduct.description}}</td> 
                 </tr>
                 <tr>
-                    <td>Price</td>
-                    <td>{{cartCtrl.selectedProduct.price}}</td>
+                    <th>Price:</th>
+                    <td>${{cartCtrl.selectedProduct.price.toFixed(2)}}</td>
                 </tr>
                 <tr>
-                    <td>Quantity Available</td>
+                    <th>Quantity Available:</th>
                     <td>{{cartCtrl.selectedProduct.quantityInStock}}</td>
                 </tr>
             </table>         

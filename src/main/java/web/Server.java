@@ -13,6 +13,8 @@ import org.jooby.json.Gzon;
 import dao.ProductDAOInterface;
 import dao.CustomerDAOInterface;
 import dao.CustomerDatabase;
+import dao.SaleDAO;
+import dao.SaleJdbcDAO;
 
 /**
  *
@@ -23,6 +25,7 @@ public class Server extends Jooby {
     private ProductDAOInterface dao = new ProductDatabase();
     //private CustomerDAOInterface custDao = new CustomerCollectionsDAO();
     private CustomerDAOInterface custDao = new CustomerDatabase();
+    private SaleDAO saleDao = new SaleJdbcDAO();
 
     public Server() {
         port(2147);
@@ -30,6 +33,7 @@ public class Server extends Jooby {
         use(new ProductModule(dao));
         use(new CustomerModule(custDao));
         use(new AssetModule());
+        use(new SaleModule(saleDao));
     }
 
     public static void main(String[] args) throws Exception {
