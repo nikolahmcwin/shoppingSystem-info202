@@ -72,7 +72,7 @@ module.factory('signInDAO', function ($resource) {
     return $resource('/api/customers/:username');
 });
 
-module.factory('cartDAO', function ($resource) {
+module.factory('saleDAO', function ($resource) {
     return $resource('/api/sales');
 });
 
@@ -158,7 +158,7 @@ module.controller('CustomerController', function (registerDAO, signInDAO, $sessi
 
 
 // Shopping cart controller
-module.controller('CartController', function (cart, cartDAO, $sessionStorage, $window) {
+module.controller('CartController', function (cart, saleDAO, $sessionStorage, $window) {
 
     this.items = cart.getItems();
     this.total = cart.getTotal();
@@ -186,7 +186,7 @@ module.controller('CartController', function (cart, cartDAO, $sessionStorage, $w
         //alert("in check out cart part");
         let cust = $sessionStorage.customer;
         cart.setCustomer(cust);
-        cartDAO.save();
+        saleDAO.save(null, cart);
         
         delete $sessionStorage.cart;
         $window.location.href = '/confirmation.html';

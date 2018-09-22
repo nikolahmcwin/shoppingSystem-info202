@@ -20,19 +20,10 @@ public class SaleModule extends Jooby {
 
     public SaleModule(SaleDAO dao) {
 
-        /*
-        get("/api/customers/:username", (req) -> {
-            String username = req.param("username").value();
-            Customer c = custDao.getCustomer(username);
-            if (c == null) {
-                throw new Err(Status.NOT_FOUND);
-            }
-            c.setPassword(null);
-            return c;
-        });*/
-        
         post("/api/sales", (req, rsp) -> {
-            Sale sale = req.body().to(Sale.class);
+            System.out.println("\n\n\n\n\n\n" + "*******    trying to saddd");
+
+            Sale sale = req.body(Sale.class);
             System.out.println("\n\n\n\n\n\n" + "*******" + sale.toString());
             dao.save(sale);
             rsp.status(Status.CREATED);
