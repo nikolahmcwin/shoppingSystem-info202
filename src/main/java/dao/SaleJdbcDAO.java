@@ -1,7 +1,5 @@
 package dao;
 
-import dao.DAOException;
-import dao.SaleDAO;
 import domain.Customer;
 import domain.Product;
 import domain.Sale;
@@ -19,7 +17,7 @@ import java.util.logging.Logger;
 
 public class SaleJdbcDAO implements SaleDAO {
 
-    private static final String url = "**** JDBC URL ****";
+    private static final String url = "jdbc:h2:tcp://localhost:9047/project;IFEXISTS=TRUE";
 
     @Override
     public void save(Sale sale) {
@@ -28,17 +26,13 @@ public class SaleJdbcDAO implements SaleDAO {
         try {
             try (
                     PreparedStatement insertSaleStmt = con.prepareStatement(
-                            "**** SQL for saving Sale goes here ****",
+                            "INSERT INTO SALE(SaleDate, Status, CustomerID) VALUES (? ? ?)",
                             Statement.RETURN_GENERATED_KEYS);
                     PreparedStatement insertSaleItemStmt = con.prepareStatement(
-                            "**** SQL for saving SaleItem goes here ****");
+                            "INSERT INTO SALEITEM(Quantity, Price, ProductID, SaleID) VALUES (? ? ? ?)");
                     PreparedStatement updateProductStmt = con.prepareStatement(
-                            "**** SQL for updating product quantity goes here ****");) {
+                            "UPDATE PRODUCT SET VALUE quantity=? WHERE productID=?");) {
 
-                // Since saving and sale involves multiple statements across
-                // multiple tables we need to control the transaction ourselves
-                // to ensure our DB remains consistent.
-                //
                 // Turn off auto-commit which effectively starts a new transaction.
                 con.setAutoCommit(false);
 
@@ -50,7 +44,7 @@ public class SaleJdbcDAO implements SaleDAO {
                     sale.setDate(new Date());
                 }
 
-                // convert sale date into to java.sql.Timestamp
+                // convert sale date into java.sql.Timestamp
                 Date date = sale.getDate();
                 Timestamp timestamp = new Timestamp(date.getTime());
 
@@ -58,6 +52,13 @@ public class SaleJdbcDAO implements SaleDAO {
                 // write code here that saves the timestamp and username in the
                 // sale table using the insertSaleStmt statement.
                 // ****
+                // INSERT INTO SALE(SaleDate, Status, CustomerID) VALUES (? ? ?)" 
+                insertSaleStmt.setTimestamp(1, timestamp);
+                insertSaleStmt.setString(2, "received");
+                insertSaleStmt.setString(3, customer.getUsername());
+                
+                insertSaleStmt.executeUpdate();
+                
                 // get the auto-generated sale ID from the database
                 ResultSet rs = insertSaleStmt.getGeneratedKeys();
 
@@ -78,11 +79,28 @@ public class SaleJdbcDAO implements SaleDAO {
                     // ****
                     // write code here that saves the sale item
                     // using the insertSaleItemStmt statement.
+                    //"INSERT INTO SALEITEM(Quantity, Price, ProductID, SaleID) VALUES (? ? ? ?)");
+
+                    insertSaleItemStmt.setInt(1, item.getQuantityPurchased());
+                    insertSaleItemStmt.setBigDecimal(2, product.getPrice());
+                    insertSaleItemStmt.setString(3, product.getProductID());
+                    insertSaleItemStmt.setInt(4, saleId);
+                    
+                    insertSaleItemStmt.executeUpdate();
+                    
                     // ****
                     // ****
                     // write code here that updates the product quantity using
                     // the updateProductStmt statement.
                     // ****
+                    // "UPDATE PRODUCT SET VALUE quantity=? WHERE productID=?"
+                    Integer newQuantity = product.getQuantityInStock();
+                    newQuantity -= item.getQuantityPurchased();
+                    updateProductStmt.setInt(1, newQuantity);
+                    updateProductStmt.setString(2, product.getProductID());
+                    
+                    updateProductStmt.executeUpdate();
+                    
                 }
 
                 // commit the transaction

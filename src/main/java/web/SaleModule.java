@@ -33,10 +33,16 @@ public class SaleModule extends Jooby {
         
         post("/api/sales", (req, rsp) -> {
             Sale sale = req.body().to(Sale.class);
-            System.out.println(sale.toString());
+            System.out.println("\n\n\n\n\n\n" + "*******" + sale.toString());
             dao.save(sale);
             rsp.status(Status.CREATED);
         });
+        
+        /*
+        Customer customer = req.body().to(Customer.class);
+            custDao.save(customer);
+            rsp.status(Status.CREATED);
+        */
     }
 
 }

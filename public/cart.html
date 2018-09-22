@@ -29,7 +29,7 @@ and open the template in the editor.
                 <tr ng-repeat="item in cartCtrl.items">
                     <td>{{item.product.name}}</td>
                     <td>${{item.product.price.toFixed(2)}}</td>
-                    <td>{{item.product.quantityInStock}}</td>
+                    <td>{{item.quantityPurchased}}</td>
                     <td>${{item.getItemTotal().toFixed(2)}}</td> 
                 </tr>
             </table>

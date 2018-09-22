@@ -47,33 +47,23 @@ creditcard) VALUES ('billy','guest','Billy','Weeks',
 
 {"customerID":3,"username":"testDB","password":"dummy","firstName":"Test","surname":"McTested","address":"1 Test st, Dunedin.l","email":"test.test@gmail.com","creditCard":"1234-5678-999-1234 09/XX 994"}
 
-CREATE SEQUENCE SaleID_Seq
-    start with 400
-    increment by 2
-    maxvalue 8999;
-
 CREATE TABLE Sale (
-    SaleID bigint default SaleID_Seq.nextval,
+    SaleID bigint auto_increment(44400),
     SaleDate Date not null,
     Status varchar(25),
     CustomerID bigint not null,
     constraint Sale_PK primary key (SaleID),
-    constraint customer_sale_FK foreign key references customer(CustomerID)
+    constraint customer_sale_FK foreign key (CustomerID) references Customer
 );
 
-CREATE SEQUENCE SaleItemID_Seq
-    start with 9000
-    increment by 5
-    maxvalue 999999;
-
-CREATE TABLE SaleTtem (
+CREATE TABLE SaleItem (
     Quantity integer not null,
     Price decimal(7,2) not null,
     ProductID varchar(20),
     SaleID bigint not null,
     constraint Saleitem_PK primary key (SaleID, ProductID),
-    constraint SaleID_FK foreign key references sale(saleid),
-    constraint ProductID_FK foreign key references product(pid)
+    constraint SaleID_FK foreign key (SaleID) references sale,
+    constraint ProductID_FK foreign key (ProductID) references product
 );
 
 
