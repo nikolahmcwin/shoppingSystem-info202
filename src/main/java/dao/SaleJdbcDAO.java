@@ -26,12 +26,12 @@ public class SaleJdbcDAO implements SaleDAO {
         try {
             try (
                     PreparedStatement insertSaleStmt = con.prepareStatement(
-                            "INSERT INTO SALE(SaleDate, Status, CustomerID) VALUES (? ? ?)",
+                            "INSERT INTO SALE(SaleDate, Status, CustomerID) VALUES (?, ?, ?)",
                             Statement.RETURN_GENERATED_KEYS);
                     PreparedStatement insertSaleItemStmt = con.prepareStatement(
-                            "INSERT INTO SALEITEM(Quantity, Price, ProductID, SaleID) VALUES (? ? ? ?)");
+                            "INSERT INTO SALEITEM(Quantity, Price, ProductID, SaleID) VALUES (?, ?, ?, ?)");
                     PreparedStatement updateProductStmt = con.prepareStatement(
-                            "UPDATE PRODUCT SET VALUE quantity=? WHERE productID=?");) {
+                            "UPDATE PRODUCT SET quantity=? WHERE PID=?");) {
 
                 // Turn off auto-commit which effectively starts a new transaction.
                 con.setAutoCommit(false);
@@ -55,7 +55,13 @@ public class SaleJdbcDAO implements SaleDAO {
                 // INSERT INTO SALE(SaleDate, Status, CustomerID) VALUES (? ? ?)" 
                 insertSaleStmt.setTimestamp(1, timestamp);
                 insertSaleStmt.setString(2, "received");
-                insertSaleStmt.setString(3, customer.getUsername());
+                insertSaleStmt.setInt(3, customer.getPersonID());
+                
+//                System.out.println("**************");
+//                System.out.println(insertSaleStmt);
+//                System.out.println("**************");
+//                System.out.println();
+                  
                 
                 insertSaleStmt.executeUpdate();
                 
