@@ -16,10 +16,13 @@ import dao.CustomerDatabase;
 import dao.SaleDAO;
 import dao.SaleJdbcDAO;
 
+
 /**
  *
  * @author peani371
  */
+
+
 public class Server extends Jooby {
 
     private ProductDAOInterface dao = new ProductDatabase();
@@ -52,5 +55,8 @@ public class Server extends Jooby {
         // wait for user to hit the Enter key
         System.in.read();
         System.exit(0);
+        
+
+
     }
 }

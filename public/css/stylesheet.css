@@ -82,6 +82,12 @@ table {
     margin: 0px;
     
 }
+.error {
+    color: red;
+    font-size: 80%;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
 #checkOutButton {
     text-align: center;
 }

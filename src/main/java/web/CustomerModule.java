@@ -9,6 +9,7 @@ import org.jooby.Jooby;
 import domain.Customer;
 import org.jooby.Status;
 import dao.CustomerDAOInterface;
+import dao.DAOException;
 import org.jooby.Err;
 
 /**
@@ -30,8 +31,15 @@ public class CustomerModule extends Jooby {
 
         post("/api/register", (req, rsp) -> {
             Customer customer = req.body().to(Customer.class);
-            custDao.save(customer);
-            rsp.status(Status.CREATED);
+            try {
+                custDao.save(customer);
+                rsp.status(Status.CREATED);
+            } catch (DAOException d) {
+                rsp.status(Status.FORBIDDEN);
+                rsp.send("Username or email address already in use. Try again.");
+                //DAOException(ex.getMessage(), ex);
+            }
+            
         });
     }
 }
