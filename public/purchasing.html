@@ -41,7 +41,8 @@ and open the template in the editor.
                     <th>Quantity Available:</th>
                     <td>{{cartCtrl.selectedProduct.quantityInStock}}</td>
                 </tr>
-            </table>         
+            </table>     
+            <p class = "error">{{cartCtrl.quantityMessage}}</p>
             <form  ng-submit="cartCtrl.addToCart(quantity)">
                 <fieldset>
                     <legend>Quantity to buy</legend>

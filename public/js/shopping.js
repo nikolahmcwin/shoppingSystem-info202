@@ -1,5 +1,4 @@
 "use strict";
-
 // Sale Item class
 class SaleItem {
 
@@ -113,81 +112,101 @@ module.controller('ProductController', function (productDAO, categoryDAO) {
 module.controller('CustomerController', function (registerDAO, signInDAO, $sessionStorage, $window) {
 
     this.signInMessage = "Please sign in to continue.";
+    this.registerMessage = "";
     this.signedIn = false;
     this.welcome = "";
-    let ctrl = this; 
-    
+    let ctrl = this;
+
     this.registerCustomer = function (customer) {
-        registerDAO.save(null, customer);
-        console.log(customer);
-        //ctrl.signInMessage = "Account created successfully. Please sign in to continue.";
-        $window.location.href = '/signin.html';
+
+        registerDAO.save(null, customer).$promise.then(function(result) { 
+                // success
+                console.log(customer);
+                //ctrl.signInMessage = "Account created successfully. Please sign in to continue.";
+                $window.location.href = '/signin.html';
+            },
+            function (error) {
+                // fail
+                ctrl.registerMessage = error.data;
+            });
+
     };
-       
+
     this.signIn = function (username, password) {
         signInDAO.get({'username': username},
-            // success
             function (customer) {
+                // success
                 $sessionStorage.customer = customer;
                 $window.location.href = '.';
-            },
-            // fail
+                },
             function () {
+                // fail
                 ctrl.signInMessage = 'Sign in failed. Please try again.';
-            }
-        );
+            });
     };
-    
-    this.checkSignIn = function() {
-        if ($sessionStorage.customer) {
-            ctrl.welcome += "Welcome, ";
-            ctrl.welcome += $sessionStorage.customer.firstName;
-            ctrl.welcome += "!";
-            ctrl.signedIn = true;
-        }
-    };
-    
-    this.signOut = function() {
-        ctrl.signedIn = false;
-        //delete $sessionStorage.customer;
-        $sessionStorage.$reset();
-        $window.location.href = '.';
-    };
-    
-});
+
+            this.checkSignIn = function () {
+                if ($sessionStorage.customer) {
+                    ctrl.welcome += "Welcome, ";
+                    ctrl.welcome += $sessionStorage.customer.firstName;
+                    ctrl.welcome += "!";
+                    ctrl.signedIn = true;
+                }
+            };
+
+            this.signOut = function () {
+                ctrl.signedIn = false;
+                //delete $sessionStorage.customer;
+                $sessionStorage.$reset();
+                $window.location.href = '.';
+            };
+
+        });
 
 
 // Shopping cart controller
 module.controller('CartController', function (cart, saleDAO, $sessionStorage, $window) {
 
+    this.quantityMessage = "";
+
     this.items = cart.getItems();
     this.total = cart.getTotal();
     this.selectedProduct = $sessionStorage.selectedProduct;
-    
-    this.buy = function(product) {
+
+
+    this.buy = function (product) {
         //alert("in buy product");
-        $sessionStorage.selectedProduct =  product;
+        $sessionStorage.selectedProduct = product;
         $window.location.href = '/purchasing.html';
     };
-    
-    this.addToCart = function(quantity) {
+
+    this.addToCart = function (quantity) {
         //alert("in Add To Cart function. ");
-        
+
+
         let prod = $sessionStorage.selectedProduct;
         let newItem = new SaleItem(prod, quantity);
-        //$sessionStorage.item =  newItem;
-        
-        cart.addItem(newItem);
-        $sessionStorage.cart = cart;
-        $window.location.href = '/products.html';
+
+        if (quantity <= 0) {
+            this.quantityMessage = "Please enter a number greater than zero.";
+        } else if (quantity > this.selectedProduct.quantityInStock) {
+            this.quantityMessage = "You cannot purchase a quanity greater than that available.";
+        } else {
+
+            cart.addItem(newItem);
+            $sessionStorage.cart = cart;
+            $window.location.href = '/products.html';
+        }
+
+
     };
-    
-    this.checkOutCart = function() {
+
+    this.checkOutCart = function () {
         //alert("in check out cart part");
         let cust = $sessionStorage.customer;
         cart.setCustomer(cust);
         saleDAO.save(null, cart);
-        
+
         delete $sessionStorage.cart;
         $window.location.href = '/confirmation.html';
 

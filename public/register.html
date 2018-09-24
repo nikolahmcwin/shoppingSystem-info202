@@ -17,9 +17,10 @@ and open the template in the editor.
     </head>
     <body>
         <div ng-include="'menu.html'" ></div>
-        <div>
+        <div ng-controller="CustomerController as custCtrl" >
             <h1>Create an Account</h1>
-            <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.registerCustomer(customer)">
+            <p class="error">{{custCtrl.registerMessage}}</p>
+            <form ng-submit="custCtrl.registerCustomer(customer)">
                 <fieldset>
                     <legend>Account Details</legend>
                     <label>Username:</label>
