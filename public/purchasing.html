@@ -16,7 +16,7 @@ and open the template in the editor.
         <script src="js/shopping.js"></script>
     </head>
     <body>
-        <div ng-include="'menu.html'" ></div>
+        <div class="menu"  ng-include="'menu.html'" ></div>
         <div ng-controller="CartController as cartCtrl">
             <h1>Quantity to purchase</h1>
             <p>How many of this product your you like to purchase?</p>
@@ -47,9 +47,8 @@ and open the template in the editor.
                 <fieldset>
                     <legend>Quantity to buy</legend>
                     <label>Quantity:</label>
-                    <input class="in" type="number" name="quantity" ng-model="quantity">
-                    <br>
-                    <button class="in" type="submit" >Add to Cart</button>
+                    <input id="cartLabel" type="number" name="quantity" ng-model="quantity">
+                    <button id="cartButton" type="submit" >Add to Cart</button>
                 </fieldset>
             </form>
         </div>

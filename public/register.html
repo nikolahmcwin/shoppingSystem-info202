@@ -16,7 +16,7 @@ and open the template in the editor.
         <script src="js/shopping.js"></script>
     </head>
     <body>
-        <div ng-include="'menu.html'" ></div>
+        <div class="menu"  ng-include="'menu.html'" ></div>
         <div ng-controller="CustomerController as custCtrl" >
             <h1>Create an Account</h1>
             <p class="error">{{custCtrl.registerMessage}}</p>
