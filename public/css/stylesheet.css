@@ -21,7 +21,7 @@ body {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
-#menuID {
+#menu {
     font-size: larger;
     text-align: center;
 }
@@ -32,16 +32,16 @@ body {
 	background-color: pink;
         border-radius: 10px;
 }
-#menuID a:visited{
+#menu a:visited{
 	color: black;
 	background-color: inherit;
 }
-#menuID a:hover{
+#menu a:hover{
     color: black;
     background-color: grey;
     color: white;
 }
-#menuID a:active{
+#menu a:active{
     color: #FFFFFF;
     background-color: inherit;
     border: 1px solid black;

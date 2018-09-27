@@ -1,4 +1,4 @@
-<div id="menuID" ng-controller="CustomerController as custCtrl" ng-init="custCtrl.checkSignIn()">
+<div id="menu" ng-controller="CustomerController as custCtrl" ng-init="custCtrl.checkSignIn()">
    <a href=".">Home</a>
    <a href="products.html" ng-if="custCtrl.signedIn">Browse Products</a>
    <a href="cart.html" ng-if="custCtrl.signedIn">View Cart</a>
